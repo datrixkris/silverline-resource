@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../ButtonTitle";
-import WhatWeDoGrid from "../WhatWeDoGrid";
+import Button from "../generic/ButtonTitle";
+import WhatWeDoGrid from "../generic/WhatWeDoGrid";
 
 const WhatWeDoSection = () => {
   return (

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
-import Footer from "./components/Footer";
+import Footer from "./components/generic/Footer";
 
 const futura = localFont({
   src: [

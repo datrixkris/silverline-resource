@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../NavBar";
+import NavBar from "../generic/NavBar";
 
 const HomeHeader = () => {
   return (
@@ -8,11 +8,11 @@ const HomeHeader = () => {
       <NavBar type="white" />
 
       {/* header content */}
-      <header className="bg-[url('/images/home-banner-image.png')] h-dvh bg-cover text-white ">
+      <header className="bg-[url('/images/home-banner-image.png')] [@media(max-height:600px)]:h-[600px] h-dvh bg-cover text-white ">
         {/* content */}
-        <div className="flex justify-center flex-col h-full maximum-width relative">
+        <div className="flex justify-center flex-col py-[200px] h-full maximum-width relative">
           {/* texts */}
-          <div className="space-y-8 max-w-[700px] -translate-y-14">
+          <div className="space-y-8 max-w-[700px] [@media(min-height:600px)]:-translate-y-14">
             <div className="w-fit rounded-4xl px-8 py-1 font-bold border-3 border-primary">
               Welcome to Silverline Resource Company Limited
             </div>

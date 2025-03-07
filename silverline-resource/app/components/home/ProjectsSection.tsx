@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../ButtonTitle";
-import ProjectsGrid from "../ProjectsGrid";
+import Button from "../generic/ButtonTitle";
+import ProjectsGrid from "../generic/ProjectsGrid";
 
 const ProjectsSection = () => {
   return (

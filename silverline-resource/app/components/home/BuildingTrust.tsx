@@ -6,7 +6,7 @@ const BuildingTrust = () => {
     <section className="min-[900px]:flex-row flex-col flex gap-10 items-center ">
       {/* images */}
       <div className="min-[900px]:w-[55%] flex gap-5 relative pb-[180px]">
-        <div className="w-1/2 relative top-[180px] overflow-clip  rounded-[20px] h-[700px]">
+        <div className="w-1/2 relative top-[140px] md:top-[180px] overflow-clip  rounded-[20px] h-[500px] md:h-[700px]">
           <Image
             src="/images/building-trust-1.png"
             alt="core values image"
@@ -15,7 +15,7 @@ const BuildingTrust = () => {
             className="size-full object-cover"
           />
         </div>
-        <div className="w-1/2 overflow-clip rounded-[20px] h-[700px]">
+        <div className="w-1/2 overflow-clip rounded-[20px] h-[500px] md:h-[700px]">
           <Image
             src="/images/building-trust-2.png"
             alt="core values image"

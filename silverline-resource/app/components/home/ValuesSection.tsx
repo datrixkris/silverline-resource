@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonTitle from "../ButtonTitle";
+import ButtonTitle from "../generic/ButtonTitle";
 import CoreValues from "./CoreValues";
 import BuildingTrust from "./BuildingTrust";
 

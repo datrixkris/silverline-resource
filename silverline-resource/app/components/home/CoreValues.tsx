@@ -11,7 +11,7 @@ const values: ValuesCardProps[] = [
   {
     title: "Innovation",
     description:
-      "Silverline Resource Company Limited provides many services to its prospective clients in the Ghanaian market and wishes to extend its businesses to other ",
+      "Application of smart technologies, Building Information Modelling for detailed planning and durable materials improves our client relationship.",
     icon: { src: "/icons/innovation.svg", alt: "innovation icon" },
   },
   {
@@ -40,13 +40,6 @@ const CoreValues = () => {
           height={500}
           className="size-full object-cover"
         />
-      </div>
-
-      {/* values */}
-      <div className="lg:w-[55%] grid sm:grid-cols-2 gap-5 md:gap-10">
-        {values.map((value, index) => (
-          <ValuesCard value={value} key={index} />
-        ))}
       </div>
     </section>
   );
