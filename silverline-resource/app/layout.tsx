@@ -6,42 +6,42 @@ import Footer from "./components/generic/Footer";
 const futura = localFont({
   src: [
     {
-      path: "../public/fonts/FuturaStd-Light.otf",
+      path: "fonts/FuturaStd-Light.otf",
       weight: "200",
       style: "normal",
     },
     {
-      path: "/fonts/FuturaStd-Light-Italic.otf",
+      path: "fonts/FuturaStd-Light-Italic.otf",
       weight: "200",
       style: "italic",
     },
     {
-      path: "/fonts/Futura-Regular.ttf",
+      path: "fonts/Futura-Regular.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "/fonts/Futura-Regular-italic.ttf",
+      path: "fonts/Futura-Regular-italic.ttf",
       weight: "400",
       style: "italic",
     },
     {
-      path: "/fonts/Futura-Medium.ttf",
+      path: "fonts/Futura-Medium.ttf",
       weight: "500",
       style: "normal",
     },
     {
-      path: "/fonts/Futura-Medium-Italic.ttf",
+      path: "fonts/Futura-Medium-Italic.ttf",
       weight: "500",
       style: "italic",
     },
     {
-      path: "/fonts/Futura-Bold.ttf",
+      path: "fonts/Futura-Bold.ttf",
       weight: "700",
       style: "normal",
     },
     {
-      path: "/fonts/Futura-Bold-italic.ttf",
+      path: "fonts/Futura-Bold-italic.ttf",
       weight: "700",
       style: "italic",
     },
