@@ -1,52 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import localFont from "next/font/local";
+// import localFont from "next/font/local";
 import Footer from "./components/generic/Footer";
-
-const futura = localFont({
-  src: [
-    {
-      path: "fonts/FuturaStd-Light.otf",
-      weight: "200",
-      style: "normal",
-    },
-    {
-      path: "fonts/FuturaStd-Light-Italic.otf",
-      weight: "200",
-      style: "italic",
-    },
-    {
-      path: "fonts/Futura-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "fonts/Futura-Regular-italic.ttf",
-      weight: "400",
-      style: "italic",
-    },
-    {
-      path: "fonts/Futura-Medium.ttf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "fonts/Futura-Medium-Italic.ttf",
-      weight: "500",
-      style: "italic",
-    },
-    {
-      path: "fonts/Futura-Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "fonts/Futura-Bold-italic.ttf",
-      weight: "700",
-      style: "italic",
-    },
-  ],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -60,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${futura.className} antialiased`}>
+      <body className={`font-[Futura] antialiased`}>
         {children}
         <Footer />
       </body>

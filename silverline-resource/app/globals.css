@@ -1,8 +1,61 @@
 @import "tailwindcss";
 
-:root {
-  
+@font-face {
+  font-family: 'Futura';
+  src: url('/fonts/FuturaStd-Light.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
 }
+
+@font-face {
+  font-family: 'Futura';
+  src: url('/fonts/FuturaStd-Light-Italic.otf') format('opentype');
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: url('/fonts/Futura-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: url('/fonts/Futura-Regular-italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: url('/fonts/Futura-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: url('/fonts/Futura-Medium-Italic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: url('/fonts/Futura-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Futura';
+  src: url('/fonts/Futura-Bold-italic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
 
 @theme {
   --color-primary: #F87201;
