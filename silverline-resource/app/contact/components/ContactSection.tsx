@@ -17,8 +17,8 @@ const ContactSection = () => {
 
           {/* text */}
           <p className="mx-auto max-w-[580px] text-center">
-            Have questions or need assistance? We're here to help! Contact us
-            today, and our team will get back to you as soon as possible.
+            Have questions or need assistance? We&apos;re here to help! Contact
+            us today, and our team will get back to you as soon as possible.
           </p>
         </div>
       </div>

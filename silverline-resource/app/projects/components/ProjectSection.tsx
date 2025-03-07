@@ -19,8 +19,8 @@ const ProjectSection = () => {
 
           {/* text */}
           <p className="mx-auto max-w-[1180px] text-center">
-            We have journeyed through the years in meeting customers' desires.
-            We walk our projects with our esteemed customers, as their
+            We have journeyed through the years in meeting customers&apos;
+            desires. We walk our projects with our esteemed customers, as their
             satisfaction is our major goal. Rooted in tradition, we honour our
             heritage by upholding the craftsmanship and values that have defined
             us since our beginning. We thrive on innovation and adaptability,

@@ -41,6 +41,14 @@ const CoreValues = () => {
           className="size-full object-cover"
         />
       </div>
+
+      <div className="lg:w-[55%]">
+        <div className="grid sm:grid-cols-2 gap-8">
+          {values.map((value, index) => (
+            <ValuesCard value={value} key={index} />
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

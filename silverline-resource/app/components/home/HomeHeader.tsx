@@ -18,7 +18,7 @@ const HomeHeader = () => {
             </div>
 
             <h2 className="font-bold text-4xl">
-              Where Building Dreams is Not Just a Job, It's Our Passion
+              Where Building Dreams is Not Just a Job, It&apos;s Our Passion
             </h2>
           </div>
 
