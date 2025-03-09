@@ -11,7 +11,7 @@ const ContactSection = () => {
             <ButtonTitle text="Contact us" />
           </div>
 
-          <h2 className="text-4xl title-secondary mx-auto w-fit">
+          <h2 className="text-4xl title-secondary mx-auto w-fit text-center">
             If You Have Any Enquiries, Please Contact Us
           </h2>
 

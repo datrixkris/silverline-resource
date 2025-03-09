@@ -1,21 +1,18 @@
 import React from "react";
-import GenericHeader from "../components/generic/GenericHeader";
-import BlogSection from "./components/BlogSection";
+import BlogContent from "./components/BlogContent";
+import BlogList from "./components/BlogList";
 
-const Blog = () => {
+const page = () => {
   return (
-    <div>
-      {/* header banner */}
-      <GenericHeader
-        bannerUrl="/images/blog-banner-image.png"
-        breadcrumb="Blog"
-      />
-
-      <main className="space-y-24 py-20">
-        <BlogSection />
+    <div className="flex sm:flex-row flex-col gap-4 md:gap-6 maximum-width">
+      <aside className="sm:w-[30%] lg:w-[35%] sm:shrink-0">
+        <BlogList />
+      </aside>
+      <main className="sm:w-[70px%] lg:[w-65%]">
+        <BlogContent />
       </main>
     </div>
   );
 };
 
-export default Blog;
+export default page;

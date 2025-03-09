@@ -76,4 +76,37 @@
   .title-primary {
     @apply text-primary uppercase font-bold
   }
+
+  .input-style {
+    @apply rounded-[20px] px-8 py-5 w-full border-2 border-secondary focus:outline outline-secondary
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari, Edge */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
+
+/* Thin, macOS-like scrollbar */
+.scrollbar-mac::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-mac::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-mac::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.6);
+  border-radius: 10px;
+}
+
+.scrollbar-mac::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 120, 120, 0.8);
 }

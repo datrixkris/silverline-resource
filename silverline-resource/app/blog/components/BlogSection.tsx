@@ -11,7 +11,7 @@ const BlogSection = () => {
             <ButtonTitle text="Blog" />
           </div>
 
-          <h2 className="text-4xl title-secondary mx-auto w-fit">
+          <h2 className="text-4xl title-secondary mx-auto w-fit text-center">
             PAST, PRESENT, AND FUTURE WONDERS
           </h2>
 
