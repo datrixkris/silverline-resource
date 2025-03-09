@@ -4,6 +4,9 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LocationIcon from "../icons/LocationIcon";
+import PhoneIcon from "../icons/PhoneIcon";
+import MailIcon from "../icons/MailIcon";
 
 const services = [
   { name: "Single and Multi-storey Construction" },
@@ -80,23 +83,69 @@ const Footer = () => {
             <div className="lg:w-1/3">
               <h3 className="title-primary mb-5 text-2xl">Our Office</h3>
 
-              <div className="mb-1">
+              <div className="mb-1 flex gap-1">
+                <div className="w-fit shrink-0">
+                  <LocationIcon className="text-primary relative top-1" />
+                </div>
                 <p className="">M30 Pulsar Street, Ashongman, Accra, Ghana</p>
               </div>
-              <div className="mb-1">
-                <a className="block" href="tel:+233503500960">
-                  +233 50 350 0960
-                </a>
-                <a className="block" href="tel:+233506835379">
-                  +233 50 683 5379
-                </a>
+              <div className="mb-1 flex gap-1">
+                <div className="w-fit shrink-0">
+                  <PhoneIcon className="text-primary relative top-1" />
+                </div>
+                <div className="">
+                  <a className="block" href="tel:+233503500960">
+                    +233 50 350 0960
+                  </a>
+                  <a className="block" href="tel:+233506835379">
+                    +233 50 683 5379
+                  </a>
+                </div>
               </div>
-              <div className="mb-1">
+              <div className="mb-1 flex gap-1">
+                <div className="w-fit shrink-0">
+                  <MailIcon className="text-primary relative top-1" />
+                </div>
                 <a href="mailto:info@silverlineresource.com" className="block">
                   info@silverlineresource.com
                 </a>
               </div>
-              <div className="mb-1">
+              <div className="mt-2 flex gap-1 items-center">
+                <div className="flex gap-1 relative top-1">
+                  <div
+                    className={` size-6 rounded-full flex items-center justify-center `}
+                  >
+                    <Image
+                      className="w-full"
+                      src="/icons/facebook.svg"
+                      alt="logo"
+                      width={30}
+                      height={30}
+                    />
+                  </div>
+                  <div
+                    className={` size-6 rounded-full flex items-center justify-center `}
+                  >
+                    <Image
+                      className="w-full"
+                      src="/icons/instagram.svg"
+                      alt="logo"
+                      width={30}
+                      height={30}
+                    />
+                  </div>
+                  <div
+                    className={` size-6 rounded-full flex items-center justify-center `}
+                  >
+                    <Image
+                      className="w-full"
+                      src="/icons/twitter.svg"
+                      alt="logo"
+                      width={30}
+                      height={30}
+                    />
+                  </div>
+                </div>
                 <p className="">silverlineresource</p>
               </div>
             </div>

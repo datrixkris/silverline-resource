@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const BlogList = () => {
   return (
-    <div className="w-full space-y-5 sm:sticky sm:top-[20px] sm:h-screen overflow-scroll scrollbar-mac flex gap-4 sm:block">
+    <div className="w-full space-y-5 sm:sticky sm:top-[100px] sm:h-screen overflow-scroll scrollbar-mac flex gap-4 sm:block">
       {Array.from({ length: 3 }).map((_, index) => (
         <div
           key={index}

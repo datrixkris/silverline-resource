@@ -37,14 +37,14 @@ const NavBar = ({ type }: { type?: "white" }) => {
     >
       <div className="flex justify-between items-center maximum-width">
         {/* logo */}
-        <div className="logo w-[160px]">
+        <div className="logo w-[130px] lg:w-[160px]">
           {navColor === "white" ? (
             <Image
               className="w-full"
               src="/logo-light.svg"
               alt="logo"
               width={200}
-              height={200}
+              height={60}
             />
           ) : (
             <Image
@@ -52,13 +52,13 @@ const NavBar = ({ type }: { type?: "white" }) => {
               src="/logo-dark.svg"
               alt="logo"
               width={200}
-              height={200}
+              height={60}
             />
           )}
         </div>
 
         {/* links */}
-        <div className="links sm:flex gap-10 hidden">
+        <div className="links md:flex gap-5 lg:gap-10 hidden items-center">
           {links.map((link, index) => {
             return (
               <Link
@@ -72,9 +72,50 @@ const NavBar = ({ type }: { type?: "white" }) => {
               </Link>
             );
           })}
-        </div>
 
-        {/* socials */}
+          {/* socials */}
+          <div className="flex gap-1">
+            <div
+              className={` size-8 rounded-full flex items-center justify-center ${
+                isScrolled ? "" : "p-0.5 bg-white"
+              }`}
+            >
+              <Image
+                className="w-full"
+                src="/icons/facebook.svg"
+                alt="logo"
+                width={30}
+                height={30}
+              />
+            </div>
+            <div
+              className={` size-8 rounded-full flex items-center justify-center ${
+                isScrolled ? "" : "p-0.5 bg-white"
+              }`}
+            >
+              <Image
+                className="w-full"
+                src="/icons/instagram.svg"
+                alt="logo"
+                width={30}
+                height={30}
+              />
+            </div>
+            <div
+              className={` size-8 rounded-full flex items-center justify-center ${
+                isScrolled ? "" : "p-0.5 bg-white"
+              }`}
+            >
+              <Image
+                className="w-full"
+                src="/icons/twitter.svg"
+                alt="logo"
+                width={30}
+                height={30}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
   );
