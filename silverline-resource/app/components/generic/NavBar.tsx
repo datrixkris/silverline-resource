@@ -21,7 +21,11 @@ const NavBar = ({ type }: { type?: "white" }) => {
   useEffect(() => {
     const checkScroll = () => {
       setIsScrolled(window.scrollY > 50);
-      window.scrollY > 50 ? setNavColor(undefined) : setNavColor(type);
+      if (window.scrollY > 50) {
+        setNavColor(undefined);
+      } else {
+        setNavColor(type);
+      }
     };
 
     checkScroll(); // Check scroll position on mount

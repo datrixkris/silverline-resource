@@ -1,7 +1,6 @@
 import React from "react";
 import GenericHeader from "../components/generic/GenericHeader";
 import BlogSection from "./components/BlogSection";
-import BlogContent from "./components/BlogContent";
 
 const BlogLayout = ({ children }: { children: React.ReactNode }) => {
   return (
