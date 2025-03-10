@@ -1,5 +1,6 @@
 import React from "react";
 import ProjectsCard, { ProjectCardProps } from "./ProjectsCard";
+import StaggeredFadeUp from "../animations/StaggeredFadeUp";
 
 const projects: ProjectCardProps[] = [
   {
@@ -35,7 +36,9 @@ const ProjectsGrid = () => {
   return (
     <section className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {projects.map((project, index) => (
-        <ProjectsCard project={project} key={index} />
+        <StaggeredFadeUp key={index} index={index}>
+          <ProjectsCard project={project} key={index} />
+        </StaggeredFadeUp>
       ))}
     </section>
   );

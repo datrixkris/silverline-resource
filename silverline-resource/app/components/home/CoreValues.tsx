@@ -1,5 +1,7 @@
 import Image from "next/image";
 import React from "react";
+import FadeIn from "../animations/FadeIn";
+import StaggeredFadeUp from "../animations/StaggeredFadeUp";
 
 const values: ValuesCardProps[] = [
   {
@@ -33,19 +35,23 @@ const CoreValues = () => {
     <section className="flex gap-10">
       {/* image */}
       <div className="w-[45%] aspect-square hidden lg:block">
-        <Image
-          src="/images/values-image.png"
-          alt="core values image"
-          width={500}
-          height={500}
-          className="size-full object-cover"
-        />
+        <FadeIn>
+          <Image
+            src="/images/values-image.png"
+            alt="core values image"
+            width={500}
+            height={500}
+            className="size-full object-cover"
+          />
+        </FadeIn>
       </div>
 
       <div className="lg:w-[55%]">
         <div className="grid sm:grid-cols-2 gap-8">
           {values.map((value, index) => (
-            <ValuesCard value={value} key={index} />
+            <StaggeredFadeUp index={index} key={index}>
+              <ValuesCard value={value} key={index} />
+            </StaggeredFadeUp>
           ))}
         </div>
       </div>
@@ -63,7 +69,7 @@ export interface ValuesCardProps {
 
 const ValuesCard = ({ value }: { value: ValuesCardProps }) => {
   return (
-    <div className="p-8 space-y-4 border border-secondary rounded-[20px] text-center">
+    <div className="p-8 h-full space-y-4 border border-secondary rounded-[20px] text-center">
       <div className="size-16 rounded-full bg-secondary mx-auto flex items-center justify-center p-2 ">
         <Image
           src={value.icon.src}

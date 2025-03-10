@@ -2,6 +2,8 @@ import React from "react";
 import ButtonTitle from "../generic/ButtonTitle";
 import CoreValues from "./CoreValues";
 import BuildingTrust from "./BuildingTrust";
+import ScaleNormal from "../animations/ScaleNormal";
+import FadeInUp from "../animations/FadeInUp";
 
 const ValuesSection = () => {
   return (
@@ -9,9 +11,14 @@ const ValuesSection = () => {
       {/* content */}
       <div className="flex flex-col gap-10 items-center justify-center text-center max-w-[1200px] mx-auto">
         {/* title button */}
-        <ButtonTitle text="why choose us" />
+        <ScaleNormal>
+          <ButtonTitle text="why choose us" />
+        </ScaleNormal>
         {/* title */}
-        <h2 className=" title-secondary text-4xl">Our core values</h2>
+
+        <FadeInUp>
+          <h2 className=" title-secondary text-4xl">Our core values</h2>
+        </FadeInUp>
       </div>
 
       <div className="mt-24">

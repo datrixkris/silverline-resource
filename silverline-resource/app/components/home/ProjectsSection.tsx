@@ -1,6 +1,8 @@
 import React from "react";
 import Button from "../generic/ButtonTitle";
 import ProjectsGrid from "../generic/ProjectsGrid";
+import ScaleNormal from "../animations/ScaleNormal";
+import FadeInUp from "../animations/FadeInUp";
 
 const ProjectsSection = () => {
   return (
@@ -8,22 +10,31 @@ const ProjectsSection = () => {
       {/* content */}
       <div className="flex flex-col gap-10 items-center justify-center text-center max-w-[1200px] mx-auto">
         {/* title button */}
-        <Button text="projects" />
+        <ScaleNormal>
+          <Button text="projects" />
+        </ScaleNormal>
         {/* title */}
-        <h2 className=" title-secondary text-4xl">
-          PAST, PRESENT, AND FUTURE WONDERS
-        </h2>
+
+        <FadeInUp>
+          <h2 className=" title-secondary text-4xl">
+            Past, present, and future wonders
+          </h2>
+        </FadeInUp>
         {/* text */}
-        <p className="">
-          We have journeyed through the years in meeting customers’ desires. We
-          walk our projects with our esteemed customers, as their satisfaction
-          is our major goal. Rooted in tradition, we honour our heritage by
-          upholding the craftsmanship and values that have defined us since our
-          beginning. We thrive on innovation and adaptability, harnessing
-          cutting-edge technology and sustainable practices to deliver superior
-          results that exceed expectations. Join us to bring your dream to
-          reality with our professionals readily at your service.
-        </p>
+
+        <FadeInUp>
+          <p className="">
+            We have journeyed through the years in meeting customers&apos;
+            desires. We walk our projects with our esteemed customers, as their
+            satisfaction is our major goal. Rooted in tradition, we honour our
+            heritage by upholding the craftsmanship and values that have defined
+            us since our beginning. We thrive on innovation and adaptability,
+            harnessing cutting-edge technology and sustainable practices to
+            deliver superior results that exceed expectations. Join us to bring
+            your dream to reality with our professionals readily at your
+            service.
+          </p>
+        </FadeInUp>
       </div>
 
       {/* cards */}

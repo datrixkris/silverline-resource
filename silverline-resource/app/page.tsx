@@ -4,6 +4,7 @@ import WhatWeDoSection from "./components/home/WhatWeDoSection";
 import ContactBanner from "./components/generic/ContactBanner";
 import ProjectsSection from "./components/home/ProjectsSection";
 import ValuesSection from "./components/home/ValuesSection";
+import FadeUpOnScroll from "./components/animations/FadeUpOnScroll";
 // import NavBar from "./components/NavBar";
 
 const HomePage = () => {
@@ -18,7 +19,9 @@ const HomePage = () => {
         {/* banner */}
         <div className=" bg-white py-14">
           <div className="maximum-width">
-            <ContactBanner />
+            <FadeUpOnScroll>
+              <ContactBanner />
+            </FadeUpOnScroll>
           </div>
         </div>
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 // import localFont from "next/font/local";
 import Footer from "./components/generic/Footer";
+import FadeInUp from "./components/animations/FadeInUp";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-[Futura] antialiased`}>
         {children}
-        <Footer />
+        <FadeInUp>
+          <Footer />
+        </FadeInUp>
       </body>
     </html>
   );

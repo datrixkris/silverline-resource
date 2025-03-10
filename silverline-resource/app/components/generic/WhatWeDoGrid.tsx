@@ -1,5 +1,6 @@
 import React from "react";
 import WhatWeDoCard, { ServicesCardProps } from "./WhatWeDoCard";
+import StaggeredFadeUp from "../animations/StaggeredFadeUp";
 
 const services: ServicesCardProps[] = [
   {
@@ -7,7 +8,6 @@ const services: ServicesCardProps[] = [
     description:
       "Our team excels in designing and constructing client-oriented single and multi-storey buildings that prioritise functionality, aesthetics and durability. This is done through innovative engineering, sustainable practices, the application of advanced technologies and the use of quality materials that last a lifetime.",
     icon: { src: "/icons/house.svg", alt: "House icon" },
-    main: true,
   },
   {
     title: "Complex Building Construction",
@@ -39,7 +39,9 @@ const WhatWeDoGrid = () => {
   return (
     <section className="flex flex-wrap  justify-center gap-x-4 gap-y-7">
       {services.map((service, index) => (
-        <WhatWeDoCard service={service} key={index} />
+        <StaggeredFadeUp index={index} key={index}>
+          <WhatWeDoCard service={service} />
+        </StaggeredFadeUp>
       ))}
     </section>
   );
