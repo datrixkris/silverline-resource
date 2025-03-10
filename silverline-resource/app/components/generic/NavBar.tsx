@@ -4,8 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import MobileNav, { Links } from "./MobileNav";
 
-const links = [
+const links: Links[] = [
   { name: "Home", link: "/" },
   { name: "About us", link: "/about" },
   { name: "What we do", link: "/services" },
@@ -119,6 +120,13 @@ const NavBar = ({ type }: { type?: "white" }) => {
               />
             </div>
           </div>
+        </div>
+
+        <div className="md:hidden">
+          <MobileNav
+            className={navColor === "white" ? "ring-white" : "ring-secondary"}
+            links={links}
+          />
         </div>
       </div>
     </nav>
