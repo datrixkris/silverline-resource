@@ -3,10 +3,8 @@
 import React from "react";
 import Button from "../generic/ButtonTitle";
 import WhatWeDoGrid from "../generic/WhatWeDoGrid";
-import { motion } from "framer-motion";
 import ScaleNormal from "../animations/ScaleNormal";
 import FadeInUp from "../animations/FadeInUp";
-import FadeUpOnScroll from "../animations/FadeUpOnScroll";
 
 const WhatWeDoSection = () => {
   return (
