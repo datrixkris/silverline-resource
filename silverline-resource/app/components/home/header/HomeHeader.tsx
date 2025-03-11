@@ -7,7 +7,6 @@ import MainSlide from "./MainSlide";
 import SlideOne from "./SlideOne";
 import SlideTwo from "./SlideTwo";
 import { AnimatePresence } from "framer-motion";
-import FadeIn from "../../animations/FadeIn";
 import FadeInOut from "../../animations/FadeInOut";
 
 const slides = [MainSlide, SlideOne, SlideTwo];

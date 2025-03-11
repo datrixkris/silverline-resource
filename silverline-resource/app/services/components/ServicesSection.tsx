@@ -1,5 +1,4 @@
 import FadeInUp from "@/app/components/animations/FadeInUp";
-import FadeUpOnScroll from "@/app/components/animations/FadeUpOnScroll";
 import ScaleNormal from "@/app/components/animations/ScaleNormal";
 import ButtonTitle from "@/app/components/generic/ButtonTitle";
 import ContactBanner from "@/app/components/generic/ContactBanner";
