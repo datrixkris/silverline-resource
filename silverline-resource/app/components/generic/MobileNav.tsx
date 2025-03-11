@@ -106,7 +106,7 @@ const MobileNav = ({
                   height={30}
                 />
               </div>
-              <div
+              {/* <div
                 className={` size-10 rounded-full flex items-center justify-center `}
               >
                 <Image
@@ -116,7 +116,7 @@ const MobileNav = ({
                   width={30}
                   height={30}
                 />
-              </div>
+              </div> */}
             </div>
           </motion.div>
         )}

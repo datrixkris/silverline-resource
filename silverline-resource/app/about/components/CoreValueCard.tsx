@@ -9,7 +9,7 @@ export interface ValuesCardProps {
 
 const CoreValueCard = ({ value }: { value: ValuesCardProps }) => {
   return (
-    <div className="px-6 sm:px-12 py-5 sm:py-8 flex gap-3 sm:gap-5 items-start bg-[#FF9032] rounded-[20px]">
+    <div className="px-6 h-full sm:px-12 py-5 sm:py-8 flex gap-3 sm:gap-5 items-start bg-[#FF9032] rounded-[20px]">
       <div className="shrink-0 size-14 sm:size-16 lg:size-20 rounded-full bg-secondary flex items-center justify-center p-2 ">
         <Image
           src={value.icon.src}

@@ -106,7 +106,7 @@ const NavBar = ({ type }: { type?: "white" }) => {
                 height={30}
               />
             </div>
-            <div
+            {/* <div
               className={` size-8 rounded-full flex items-center justify-center ${
                 isScrolled ? "" : "p-0.5 bg-white"
               }`}
@@ -118,7 +118,7 @@ const NavBar = ({ type }: { type?: "white" }) => {
                 width={30}
                 height={30}
               />
-            </div>
+            </div> */}
           </div>
         </div>
 

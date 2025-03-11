@@ -1,6 +1,9 @@
 import ButtonTitle from "@/app/components/generic/ButtonTitle";
 import React from "react";
 import CoreValueCard, { ValuesCardProps } from "./CoreValueCard";
+import ScaleNormal from "@/app/components/animations/ScaleNormal";
+import FadeInUp from "@/app/components/animations/FadeInUp";
+import StaggeredFadeUp from "@/app/components/animations/StaggeredFadeUp";
 
 const values: ValuesCardProps[] = [
   {
@@ -46,22 +49,28 @@ const CoreValuesSection = () => {
     <section className="space-y-16 maximum-width">
       {/* title button */}
       <div className="w-fit mx-auto">
-        <ButtonTitle text="Our core values" />
+        <ScaleNormal>
+          <ButtonTitle text="Our core values" />
+        </ScaleNormal>
       </div>
 
       {/* text */}
-      <p className="mx-auto max-w-[890px] text-center">
-        The following core values reflect our commitment to ethical conduct,
-        client satisfaction, innovation, and professionalism in all aspects of
-        our business operations. The following core values reflect our
-        commitment to ethical conduct, client satisfaction, innovation, and
-        professionalism in all aspects of our business operations.
-      </p>
+      <FadeInUp>
+        <p className="mx-auto max-w-[890px] text-center">
+          The following core values reflect our commitment to ethical conduct,
+          client satisfaction, innovation, and professionalism in all aspects of
+          our business operations. The following core values reflect our
+          commitment to ethical conduct, client satisfaction, innovation, and
+          professionalism in all aspects of our business operations.
+        </p>
+      </FadeInUp>
 
       {/* values */}
       <div className=" grid md:grid-cols-2 gap-5">
         {values.map((value, index) => (
-          <CoreValueCard value={value} key={index} />
+          <StaggeredFadeUp key={index} index={index}>
+            <CoreValueCard value={value} key={index} />
+          </StaggeredFadeUp>
         ))}
       </div>
     </section>

@@ -145,7 +145,7 @@ const Footer = () => {
                         height={30}
                       />
                     </div>
-                    <div
+                    {/* <div
                       className={` size-6 rounded-full flex items-center justify-center `}
                     >
                       <Image
@@ -155,7 +155,7 @@ const Footer = () => {
                         width={30}
                         height={30}
                       />
-                    </div>
+                    </div> */}
                   </div>
                   <p className="">silverlineresource</p>
                 </div>

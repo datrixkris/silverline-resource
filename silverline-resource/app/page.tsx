@@ -1,5 +1,5 @@
 import React from "react";
-import HomeHeader from "./components/home/HomeHeader";
+import HomeHeader from "./components/home/header/HomeHeader";
 import WhatWeDoSection from "./components/home/WhatWeDoSection";
 import ContactBanner from "./components/generic/ContactBanner";
 import ProjectsSection from "./components/home/ProjectsSection";

@@ -2,6 +2,8 @@ import ButtonTitle from "@/app/components/generic/ButtonTitle";
 import React from "react";
 import AboutCompany from "./AboutCompany";
 import MissionVision, { MissionVisionProps } from "./MissionVision";
+import ScaleNormal from "@/app/components/animations/ScaleNormal";
+import StaggeredFadeUp from "@/app/components/animations/StaggeredFadeUp";
 
 const missionVisionData: MissionVisionProps[] = [
   {
@@ -24,16 +26,20 @@ const AboutUsSection = () => {
   return (
     <section className="space-y-16 maximum-width">
       {/* title button */}
-      <div className="w-fit mx-auto">
-        <ButtonTitle text="About us" />
-      </div>
+      <ScaleNormal>
+        <div className="w-fit mx-auto">
+          <ButtonTitle text="About us" />
+        </div>
+      </ScaleNormal>
 
       {/*  about company*/}
       <AboutCompany />
 
       {/* mission and vision */}
       {missionVisionData.map((data, index) => (
-        <MissionVision data={data} key={index} />
+        <StaggeredFadeUp key={index} index={index}>
+          <MissionVision data={data} key={index} />
+        </StaggeredFadeUp>
       ))}
     </section>
   );

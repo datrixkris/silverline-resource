@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "./NavBar";
 import Link from "next/link";
+import FadeInUp from "../animations/FadeInUp";
 
 interface GenericHeaderProps {
   breadcrumb: string;
@@ -32,12 +33,14 @@ const GenericHeader = ({
               <h2 className="font-bold text-4xl text-secondary">{title}</h2>
             )}
 
-            <p className="font-bold">
-              <Link href="/" className="hover:text-primary">
-                Home
-              </Link>{" "}
-              / <span className="text-primary">{breadcrumb}</span>
-            </p>
+            <FadeInUp down={true}>
+              <p className="font-bold">
+                <Link href="/" className="hover:text-primary">
+                  Home
+                </Link>{" "}
+                / <span className="text-primary">{breadcrumb}</span>
+              </p>
+            </FadeInUp>
           </div>
         </div>
       </header>
