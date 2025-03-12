@@ -13,7 +13,7 @@ const CarouselIndicators = ({
         <div
           key={index}
           onClick={() => setCurrent(index)}
-          className={`size-5 rounded-full transition-all duration-300 cursor-pointer hover:bg-primary hover:scale-125 ${
+          className={`size-5 rounded-full transition-all duration-300 cursor-pointer md:hover:bg-primary md:hover:scale-125 ${
             index === current ? "bg-primary" : "bg-secondary"
           }`}
         ></div>
