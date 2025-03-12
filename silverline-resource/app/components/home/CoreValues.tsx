@@ -34,10 +34,10 @@ const CoreValues = () => {
   return (
     <section className="flex gap-10">
       {/* image */}
-      <div className="w-[45%] aspect-square hidden lg:block">
+      <div className="w-[45%] aspect-square hidden lg:block overflow-clip rounded-3xl">
         <FadeIn>
           <Image
-            src="/images/values-image.png"
+            src="https://res.cloudinary.com/dnpiachdz/image/upload/v1741792117/values-image_uromxk.png"
             alt="core values image"
             width={500}
             height={500}

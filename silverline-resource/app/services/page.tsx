@@ -2,6 +2,8 @@ import React from "react";
 import GenericHeader from "../components/generic/GenericHeader";
 import ServicesSection from "./components/ServicesSection";
 import type { Metadata } from "next";
+import FadeInUp from "../components/animations/FadeInUp";
+import Footer from "../components/generic/Footer";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -50,7 +52,7 @@ const Services = () => {
     <div>
       {/* header banner */}
       <GenericHeader
-        bannerUrl="/images/services-banner-image.png"
+        bannerUrl="https://res.cloudinary.com/dnpiachdz/image/upload/v1741792117/services-banner-image_oifjgy.png"
         breadcrumb="What we do"
         navbarType="white"
       />
@@ -58,6 +60,10 @@ const Services = () => {
       <main className="space-y-24 pt-20">
         <ServicesSection />
       </main>
+
+      <FadeInUp>
+        <Footer />
+      </FadeInUp>
     </div>
   );
 };

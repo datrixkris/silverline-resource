@@ -41,7 +41,9 @@ const ProjectSection = () => {
       </div>
 
       <div className="bg-background space-y-16 py-16 pb-24">
-        <ProjectsGrid />
+        <div className="maximum-width">
+          <ProjectsGrid />
+        </div>
 
         <div className="maximum-width">
           <ScaleNormal>

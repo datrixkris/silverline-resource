@@ -7,14 +7,16 @@ import StaggeredFadeUp from "@/app/components/animations/StaggeredFadeUp";
 
 const missionVisionData: MissionVisionProps[] = [
   {
-    imgUrl: "/images/mission.png",
+    imgUrl:
+      "https://res.cloudinary.com/dnpiachdz/image/upload/v1741792115/mission_kwlgon.png",
     title: "Mission",
     description:
       "A company that inspires and fulfils growth to customer expectation by creating value for money and providing the highest level of service in the construction industry while developing a highly successful team.",
     flexReverse: false,
   },
   {
-    imgUrl: "/images/vision.png",
+    imgUrl:
+      "https://res.cloudinary.com/dnpiachdz/image/upload/v1741792117/vision_v4zapb.png",
     title: "Vision",
     description:
       "To be the leading construction firm recognised for transforming visions into reality, building with integrity, excellence and innovation.",

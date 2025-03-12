@@ -22,7 +22,7 @@ const BuildingTrust = () => {
           className="w-1/2 relative top-[140px] md:top-[180px] overflow-clip  rounded-[20px] h-[500px] md:h-[700px]"
         >
           <Image
-            src="/images/building-trust-1.png"
+            src="https://res.cloudinary.com/dnpiachdz/image/upload/v1741792113/building-trust-1_hvjpr6.png"
             alt="core values image"
             width={350}
             height={700}
@@ -41,7 +41,7 @@ const BuildingTrust = () => {
           className="w-1/2 overflow-clip rounded-[20px] h-[500px] md:h-[700px]"
         >
           <Image
-            src="/images/building-trust-2.png"
+            src="https://res.cloudinary.com/dnpiachdz/image/upload/v1741792113/building-trust-2_colbsq.png"
             alt="core values image"
             width={350}
             height={700}

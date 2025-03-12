@@ -3,7 +3,7 @@ import Button from "./Button";
 
 const ContactBanner = () => {
   return (
-    <div className="py-14 lg:py-20 px-8 lg:px-24 bg-[url('/images/contact-banner-image.png')] rounded-[20px] bg-cover">
+    <div className="py-14 lg:py-20 px-8 lg:px-24 bg-[url('https://res.cloudinary.com/dnpiachdz/image/upload/v1741792113/contact-banner-image_yduirt.png')] rounded-[20px] bg-cover">
       <div className="flex md:justify-between gap-5 flex-wrap md:flex-nowrap items-center text-center md:text-left justify-center">
         {/* content */}
         <div className="xl:ml-20">

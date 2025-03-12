@@ -1,5 +1,8 @@
+"use client";
+
 import FadeIn from "@/app/components/animations/FadeIn";
 import FadeInUp from "@/app/components/animations/FadeInUp";
+import { CldVideoPlayer } from "next-cloudinary";
 import Image from "next/image";
 import React from "react";
 
@@ -17,13 +20,20 @@ const AboutCompany = () => {
         {/* image */}
         <FadeInUp>
           <div className="my-8 rounded-[20px] overflow-clip lg:hidden">
-            <Image
-              src="/images/about-company.png"
-              alt="about company img"
-              height={500}
-              width={650}
+            <video
+              controls
+              autoPlay
+              loop
+              muted
+              id="desktop"
               className="w-full object-cover"
-            />
+            >
+              <source
+                src="https://res.cloudinary.com/dnpiachdz/video/upload/v1741789880/Silverline_Ad_New_high_Compressed_rcdibb.mp4"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </FadeInUp>
 
@@ -64,13 +74,20 @@ const AboutCompany = () => {
       {/* image */}
       <div className="hidden lg:block w-[55%] rounded-[20px] overflow-clip">
         <FadeIn>
-          <Image
-            src="/images/about-company.png"
-            alt="about company img"
-            height={500}
-            width={650}
-            className="w-full object-cover"
-          />
+          <video
+            controls
+            autoPlay
+            loop
+            muted
+            id="desktop"
+            className="w-full object-cover hidden lg:block "
+          >
+            <source
+              src="https://res.cloudinary.com/dnpiachdz/video/upload/v1741789880/Silverline_Ad_New_high_Compressed_rcdibb.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
         </FadeIn>
       </div>
     </div>

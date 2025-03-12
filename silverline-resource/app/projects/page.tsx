@@ -2,6 +2,8 @@ import React from "react";
 import GenericHeader from "../components/generic/GenericHeader";
 import ProjectSection from "./components/ProjectSection";
 import type { Metadata } from "next";
+import FadeInUp from "../components/animations/FadeInUp";
+import Footer from "../components/generic/Footer";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -50,13 +52,17 @@ const Projects = () => {
     <div>
       {/* header banner */}
       <GenericHeader
-        bannerUrl="/images/project-banner-image.png"
+        bannerUrl="https://res.cloudinary.com/dnpiachdz/image/upload/v1741792116/project-banner-image_qupg83.png"
         breadcrumb="Projects"
       />
 
       <main className="space-y-24 pt-20">
         <ProjectSection />
       </main>
+
+      <FadeInUp>
+        <Footer />
+      </FadeInUp>
     </div>
   );
 };

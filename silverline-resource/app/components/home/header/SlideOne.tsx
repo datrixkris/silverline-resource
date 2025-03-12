@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const SlideOne = () => {
   return (
-    <header className="bg-[url('/images/home-banner-image3.jpg')] absolute inset-0 w-full h-full bg-cover text-white ">
+    <header className="bg-[url('https://res.cloudinary.com/dnpiachdz/image/upload/v1741792329/home-banner-image2_zoc0bz.jpg')] absolute inset-0 w-full h-full bg-cover text-white ">
       {/* content */}
       <div className="flex justify-center flex-col py-[200px] h-full maximum-width relative">
         <SequentialText />

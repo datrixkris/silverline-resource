@@ -5,6 +5,8 @@ import ContactBanner from "./components/generic/ContactBanner";
 import ProjectsSection from "./components/home/ProjectsSection";
 import ValuesSection from "./components/home/ValuesSection";
 import FadeUpOnScroll from "./components/animations/FadeUpOnScroll";
+import FadeInUp from "./components/animations/FadeInUp";
+import Footer from "./components/generic/Footer";
 // import NavBar from "./components/NavBar";
 
 const HomePage = () => {
@@ -34,6 +36,10 @@ const HomePage = () => {
           {/* </div> */}
         </div>
       </main>
+
+      <FadeInUp>
+        <Footer />
+      </FadeInUp>
     </div>
   );
 };

@@ -50,12 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-[Futura] antialiased`}>
-        {children}
-        <FadeInUp>
-          <Footer />
-        </FadeInUp>
-      </body>
+      <body className={`font-[Futura] antialiased`}>{children}</body>
     </html>
   );
 }

@@ -4,6 +4,8 @@ import AboutUsSection from "./components/AboutUsSection";
 import CoreValuesSection from "./components/CoreValuesSection";
 import TeamSection from "./components/TeamSection";
 import type { Metadata } from "next";
+import FadeInUp from "../components/animations/FadeInUp";
+import Footer from "../components/generic/Footer";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -52,7 +54,7 @@ const About = () => {
     <div>
       {/* header banner */}
       <GenericHeader
-        bannerUrl="/images/about-banner-image.png"
+        bannerUrl="https://res.cloudinary.com/dnpiachdz/image/upload/v1741792113/about-banner-image_ehuxui.png"
         breadcrumb="About us"
       />
 
@@ -61,6 +63,10 @@ const About = () => {
         <CoreValuesSection />
         <TeamSection />
       </main>
+
+      <FadeInUp>
+        <Footer />
+      </FadeInUp>
     </div>
   );
 };

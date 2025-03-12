@@ -4,6 +4,8 @@ import ContactSection from "./components/ContactSection";
 import ContactDetailsSection from "./components/ContactDetailsSection";
 import Map from "./components/Map";
 import type { Metadata } from "next";
+import FadeInUp from "../components/animations/FadeInUp";
+import Footer from "../components/generic/Footer";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -52,7 +54,7 @@ const Contact = () => {
     <div>
       {/* header banner */}
       <GenericHeader
-        bannerUrl="/images/contact-header-image.png"
+        bannerUrl="https://res.cloudinary.com/dnpiachdz/image/upload/v1741792114/contact-header-image_zfiywe.png"
         breadcrumb="Contact us"
       />
 
@@ -61,6 +63,10 @@ const Contact = () => {
         <ContactDetailsSection />
         <Map />
       </main>
+
+      <FadeInUp>
+        <Footer />
+      </FadeInUp>
     </div>
   );
 };
