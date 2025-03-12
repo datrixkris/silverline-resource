@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-// import localFont from "next/font/local";
-import Footer from "./components/generic/Footer";
-import FadeInUp from "./components/animations/FadeInUp";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 

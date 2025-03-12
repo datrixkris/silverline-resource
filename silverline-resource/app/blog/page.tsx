@@ -1,6 +1,6 @@
 import React from "react";
-import BlogContent from "./components/BlogContent";
-import BlogList from "./components/BlogList";
+// import BlogContent from "./components/BlogContent";
+// import BlogList from "./components/BlogList";
 import type { Metadata } from "next";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";

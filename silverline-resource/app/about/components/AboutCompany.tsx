@@ -2,8 +2,6 @@
 
 import FadeIn from "@/app/components/animations/FadeIn";
 import FadeInUp from "@/app/components/animations/FadeInUp";
-import { CldVideoPlayer } from "next-cloudinary";
-import Image from "next/image";
 import React from "react";
 
 const AboutCompany = () => {
