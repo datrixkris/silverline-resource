@@ -48,7 +48,7 @@ const MobileNav = ({
               className="w-fit"
             >
               <HamburgerIcon
-                className={`w-12 h-9 ring-2 ring-secondary rounded-md hover:cursor-pointer ${className}`}
+                className={`w-12 h-9 ring-2 ring-local-secondary rounded-md hover:cursor-pointer ${className}`}
               />
             </motion.div>
           )}
@@ -73,8 +73,8 @@ const MobileNav = ({
                 <Link
                   href={link.link}
                   key={index}
-                  className={`px-5 py-3 block hover:text-primary text-secondary font-medium ${
-                    pathname === link.link ? "!text-primary" : ""
+                  className={`px-5 py-3 block hover:text-local-primary text-local-secondary font-medium ${
+                    pathname === link.link ? "!text-local-primary" : ""
                   }`}
                 >
                   {link.name}

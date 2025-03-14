@@ -10,7 +10,7 @@ const AboutCompany = () => {
       {/* content */}
       <div className="lg:w-[45%]">
         <FadeInUp>
-          <h2 className="title-secondary text-4xl mb-3">
+          <h2 className="title-local-secondary text-4xl mb-3">
             Silverline resource company limited
           </h2>
         </FadeInUp>

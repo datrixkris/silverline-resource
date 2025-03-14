@@ -69,8 +69,8 @@ export interface ValuesCardProps {
 
 const ValuesCard = ({ value }: { value: ValuesCardProps }) => {
   return (
-    <div className="p-8 h-full space-y-4 border border-secondary rounded-[20px] text-center">
-      <div className="size-16 rounded-full bg-secondary mx-auto flex items-center justify-center p-2 ">
+    <div className="p-8 h-full space-y-4 border border-local-secondary rounded-[20px] text-center">
+      <div className="size-16 rounded-full bg-local-secondary mx-auto flex items-center justify-center p-2 ">
         <Image
           src={value.icon.src}
           alt={value.icon.alt}
@@ -80,7 +80,7 @@ const ValuesCard = ({ value }: { value: ValuesCardProps }) => {
         />
       </div>
 
-      <h3 className="title-secondary text-xl">{value.title}</h3>
+      <h3 className="title-local-secondary text-xl">{value.title}</h3>
 
       <p className="">{value.description}</p>
     </div>

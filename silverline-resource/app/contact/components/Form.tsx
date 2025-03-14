@@ -50,7 +50,7 @@ const Form = () => {
 
       {/* submit */}
       <div className="">
-        <button className="bg-primary text-white rounded-[50px] px-12 py-4 cursor-pointer transition-transform hover:scale-105 active:scale-100 disabled:scale-100">
+        <button className="bg-local-primary text-white rounded-[50px] px-12 py-4 cursor-pointer transition-transform hover:scale-105 active:scale-100 disabled:scale-100">
           Send Message
         </button>
       </div>

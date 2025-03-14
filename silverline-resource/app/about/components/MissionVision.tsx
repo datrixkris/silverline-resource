@@ -12,7 +12,7 @@ export interface MissionVisionProps {
 const MissionVision = ({ data }: { data: MissionVisionProps }) => {
   return (
     <div
-      className={`flex md:flex-row flex-col items-center gap-8 md:gap-14 px-8 sm:px-12 md:px-20 py-8 bg-secondary text-white rounded-[20px] ${
+      className={`flex md:flex-row flex-col items-center gap-8 md:gap-14 px-8 sm:px-12 md:px-20 py-8 bg-local-secondary text-white rounded-[20px] ${
         data.flexReverse ? "md:flex-row-reverse flex-col" : ""
       }`}
     >

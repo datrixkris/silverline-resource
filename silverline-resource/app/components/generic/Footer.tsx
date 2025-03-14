@@ -31,7 +31,7 @@ const Footer = () => {
 
   return (
     <footer>
-      <div className="py-24 bg-secondary text-white">
+      <div className="py-24 bg-local-secondary text-white">
         <div className="maximum-width flex sm:flex-row flex-col gap-14 justify-between">
           {/* about silver line */}
           <div className="sm:w-[40%] lg:w-[30%]">
@@ -61,7 +61,7 @@ const Footer = () => {
           <div className="sm:w-[60%] lg:w-[70%] flex sm:flex-row flex-col gap-14 lg:justify-between sm:self-end flex-wrap lg:flex-nowrap">
             <div className="lg:w-1/3">
               <FadeInUp>
-                <h3 className="title-primary mb-5 text-2xl">Services</h3>
+                <h3 className="title-local-primary mb-5 text-2xl">Services</h3>
 
                 {services.map((service, index) => (
                   <p key={index} className="mb-1">
@@ -72,14 +72,16 @@ const Footer = () => {
             </div>
             <div className="lg:w-1/3">
               <FadeInUp>
-                <h3 className="title-primary mb-5 text-2xl">Quick links</h3>
+                <h3 className="title-local-primary mb-5 text-2xl">
+                  Quick links
+                </h3>
 
                 {links.map((link, index) => (
                   <Link
                     href={link.link}
                     key={index}
-                    className={`mb-1 block w-fit hover:text-primary ${
-                      pathname === link.link ? "text-primary" : ""
+                    className={`mb-1 block w-fit hover:text-local-primary ${
+                      pathname === link.link ? "text-local-primary" : ""
                     }`}
                   >
                     {link.name}
@@ -89,17 +91,19 @@ const Footer = () => {
             </div>
             <div className="lg:w-1/3">
               <FadeInUp>
-                <h3 className="title-primary mb-5 text-2xl">Our Office</h3>
+                <h3 className="title-local-primary mb-5 text-2xl">
+                  Our Office
+                </h3>
 
                 <div className="mb-1 flex gap-1">
                   <div className="w-fit shrink-0">
-                    <LocationIcon className="text-primary relative top-1" />
+                    <LocationIcon className="text-local-primary relative top-1" />
                   </div>
                   <p className="">M30 Pulsar Street, Ashongman, Accra, Ghana</p>
                 </div>
                 <div className="mb-1 flex gap-1">
                   <div className="w-fit shrink-0">
-                    <PhoneIcon className="text-primary relative top-1" />
+                    <PhoneIcon className="text-local-primary relative top-1" />
                   </div>
                   <div className="">
                     <a className="block" href="tel:+233503500960">
@@ -112,7 +116,7 @@ const Footer = () => {
                 </div>
                 <div className="mb-1 flex gap-1">
                   <div className="w-fit shrink-0">
-                    <MailIcon className="text-primary relative top-1" />
+                    <MailIcon className="text-local-primary relative top-1" />
                   </div>
                   <a
                     href="mailto:info@silverlineresource.com"

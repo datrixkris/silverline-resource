@@ -15,7 +15,7 @@ const HomePage = () => {
       {/* header */}
       <HomeHeader />
 
-      <main className="bg-background space-y-20 pt-20">
+      <main className="bg-local-background space-y-20 pt-20">
         <WhatWeDoSection />
 
         {/* banner */}

@@ -52,7 +52,7 @@ const BuildingTrust = () => {
       {/* content */}
       <div className="min-[900px]:w-[45%] space-y-8 text-center">
         <FadeInUp>
-          <h3 className="title-secondary text-4xl ">
+          <h3 className="title-local-secondary text-4xl ">
             Decades of building trust, brick by brick
           </h3>
         </FadeInUp>
@@ -70,7 +70,7 @@ const BuildingTrust = () => {
 
         <FadeInUp>
           <div className="w-fit mx-auto">
-            <h3 className="text-4xl title-primary">
+            <h3 className="text-4xl title-local-primary">
               <AnimatedCounter />
               K+
             </h3>

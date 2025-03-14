@@ -37,7 +37,7 @@ function SequentialText() {
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1.5, ease: "easeInOut" }}
-        className="w-fit rounded-4xl px-8 py-1 font-bold border-3 border-primary"
+        className="w-fit rounded-4xl px-8 py-1 font-bold border-3 border-local-primary"
       >
         Welcome to Silverline Resource Company Limited
       </motion.div>

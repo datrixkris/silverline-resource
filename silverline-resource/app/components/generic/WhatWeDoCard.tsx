@@ -14,7 +14,7 @@ const WhatWeDoCard = ({ service }: { service: ServicesCardProps }) => {
 
   return (
     <div
-      className="sm:w-[440px] p-10 text-center space-y-5 rounded-[20px] bg-white shadow-(--shadow-service-card) hover:bg-secondary hover:text-white transition-colors duration-300 h-full"
+      className="sm:w-[440px] p-10 text-center space-y-5 rounded-[20px] bg-white shadow-(--shadow-service-card) hover:bg-local-secondary hover:text-white transition-colors duration-300 h-full"
       onMouseEnter={() => setIcon(service.icon.src.iconLight)}
       onMouseLeave={() => setIcon(service.icon.src.iconDark)}
     >
@@ -28,7 +28,7 @@ const WhatWeDoCard = ({ service }: { service: ServicesCardProps }) => {
         />
       </div>
 
-      <h3 className="title-primary text-xl">{service.title}</h3>
+      <h3 className="title-local-primary text-xl">{service.title}</h3>
 
       <p className="">{service.description}</p>
     </div>

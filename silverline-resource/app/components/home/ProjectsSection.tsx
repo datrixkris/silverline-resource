@@ -16,7 +16,7 @@ const ProjectsSection = () => {
         {/* title */}
 
         <FadeInUp>
-          <h2 className=" title-secondary text-4xl">
+          <h2 className=" title-local-secondary text-4xl">
             Past, present, and future wonders
           </h2>
         </FadeInUp>
