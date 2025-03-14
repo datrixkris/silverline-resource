@@ -12,14 +12,14 @@ const Button = ({ text, link }: ButtonProps) => {
       {link ? (
         <Link href={link}>
           <button
-            className={`bg-primary rounded-[10px] text-white uppercase font-bold px-12 py-5 hover:scale-105 active:scale-100 transition-transform`}
+            className={`bg-local-primary rounded-[10px] text-white uppercase font-bold px-12 py-5 hover:scale-105 active:scale-100 transition-transform`}
           >
             {text}
           </button>
         </Link>
       ) : (
         <button
-          className={`bg-primary rounded-[10px] text-white uppercase font-bold px-12 py-5 hover:scale-105 active:scale-100 transition-transform text-nowrap`}
+          className={`bg-local-primary rounded-[10px] text-white uppercase font-bold px-12 py-5 hover:scale-105 active:scale-100 transition-transform text-nowrap`}
         >
           {text}
         </button>

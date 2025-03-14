@@ -30,15 +30,17 @@ const GenericHeader = ({
           {/* content */}
           <div className="space-y-8 max-w-[700px] translate-y-10">
             {title && (
-              <h2 className="font-bold text-4xl text-secondary">{title}</h2>
+              <h2 className="font-bold text-4xl text-local-secondary">
+                {title}
+              </h2>
             )}
 
             <FadeInUp down={true}>
               <p className="font-bold">
-                <Link href="/" className="hover:text-primary">
+                <Link href="/" className="hover:text-local-primary">
                   Home
                 </Link>{" "}
-                / <span className="text-primary">{breadcrumb}</span>
+                / <span className="text-local-primary">{breadcrumb}</span>
               </p>
             </FadeInUp>
           </div>

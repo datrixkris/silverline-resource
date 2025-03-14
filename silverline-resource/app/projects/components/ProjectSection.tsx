@@ -18,7 +18,7 @@ const ProjectSection = () => {
           </ScaleNormal>
 
           <FadeInUp>
-            <h2 className="text-4xl title-secondary mx-auto w-fit">
+            <h2 className="text-4xl title-local-secondary mx-auto w-fit">
               PAST, PRESENT, AND FUTURE WONDERS
             </h2>
           </FadeInUp>
@@ -40,7 +40,7 @@ const ProjectSection = () => {
         </div>
       </div>
 
-      <div className="bg-background space-y-16 py-16 pb-24">
+      <div className="bg-local-background space-y-16 py-16 pb-24">
         <div className="maximum-width">
           <ProjectsGrid />
         </div>

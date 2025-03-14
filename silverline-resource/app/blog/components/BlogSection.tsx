@@ -16,7 +16,7 @@ const BlogSection = () => {
           </ScaleNormal>
 
           <FadeInUp>
-            <h2 className="text-4xl title-secondary mx-auto w-fit text-center">
+            <h2 className="text-4xl title-local-secondary mx-auto w-fit text-center">
               Past, present, and future wonders
             </h2>
           </FadeInUp>

@@ -17,7 +17,7 @@ const ValuesSection = () => {
         {/* title */}
 
         <FadeInUp>
-          <h2 className=" title-secondary text-4xl">Our core values</h2>
+          <h2 className=" title-local-secondary text-4xl">Our core values</h2>
         </FadeInUp>
       </div>
 

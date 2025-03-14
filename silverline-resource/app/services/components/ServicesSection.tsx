@@ -18,7 +18,7 @@ const ServicesSection = () => {
           </ScaleNormal>
 
           <FadeInUp>
-            <h2 className="text-4xl title-secondary mx-auto w-fit">
+            <h2 className="text-4xl title-local-secondary mx-auto w-fit">
               Silverline resource
             </h2>
           </FadeInUp>
@@ -35,7 +35,7 @@ const ServicesSection = () => {
         </div>
       </div>
 
-      <div className="bg-background space-y-16 py-16 pb-24">
+      <div className="bg-local-background space-y-16 py-16 pb-24">
         <div className="maximum-width">
           <WhatWeDoGrid />
         </div>

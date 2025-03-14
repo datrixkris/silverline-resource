@@ -18,7 +18,9 @@ const WhatWeDoSection = () => {
         </ScaleNormal>
         {/* title */}
         <FadeInUp>
-          <h2 className=" title-secondary text-4xl">Silverline resource</h2>
+          <h2 className=" title-local-secondary text-4xl">
+            Silverline resource
+          </h2>
         </FadeInUp>
         {/* text */}
         <FadeInUp>

@@ -8,7 +8,7 @@ const ContactBanner = () => {
         {/* content */}
         <div className="xl:ml-20">
           <div className="max-w-[480px]">
-            <h3 className="title-primary text-[30px]">
+            <h3 className="title-local-primary text-[30px]">
               Have a building project in mind?
             </h3>
             <p className="text-white">

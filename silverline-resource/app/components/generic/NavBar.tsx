@@ -69,8 +69,8 @@ const NavBar = ({ type }: { type?: "white" }) => {
               <Link
                 href={link.link}
                 key={index}
-                className={`hover:text-primary font-medium ${
-                  pathname === link.link ? "text-primary" : ""
+                className={`hover:text-local-primary font-medium ${
+                  pathname === link.link ? "text-local-primary" : ""
                 }`}
               >
                 <span>{link.name}</span>
@@ -124,7 +124,9 @@ const NavBar = ({ type }: { type?: "white" }) => {
 
         <div className="md:hidden">
           <MobileNav
-            className={navColor === "white" ? "ring-white" : "ring-secondary"}
+            className={
+              navColor === "white" ? "ring-white" : "ring-local-secondary"
+            }
             links={links}
           />
         </div>

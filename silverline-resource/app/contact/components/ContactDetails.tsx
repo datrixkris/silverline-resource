@@ -11,18 +11,18 @@ const ContactDetails = () => {
         <h3 className="text-3xl font-bold">Contact Details</h3>
       </FadeInUp>
 
-      <div className="divide-y divide-secondary">
+      <div className="divide-y divide-local-secondary">
         {/* our office */}
         <FadeInUp>
           <div className="flex gap-4 py-5">
             {/* icon */}
-            <div className="size-12 shrink-0 rounded-full bg-secondary p-2 flex items-center justify-center">
+            <div className="size-12 shrink-0 rounded-full bg-local-secondary p-2 flex items-center justify-center">
               <LocationIcon className="text-white size-full" />
             </div>
 
             {/* content */}
             <div className="">
-              <h4 className="text-primary font-bold text-xl mb-3">
+              <h4 className="text-local-primary font-bold text-xl mb-3">
                 Our Office
               </h4>
               <p className="max-w-[255px]">
@@ -36,13 +36,15 @@ const ContactDetails = () => {
         <FadeInUp>
           <div className="flex gap-4 py-5">
             {/* icon */}
-            <div className="size-12 shrink-0 rounded-full bg-secondary p-2 flex items-center justify-center">
+            <div className="size-12 shrink-0 rounded-full bg-local-secondary p-2 flex items-center justify-center">
               <PhoneIcon className="text-white size-full" />
             </div>
 
             {/* content */}
             <div className="">
-              <h4 className="text-primary font-bold text-xl mb-3">Call us</h4>
+              <h4 className="text-local-primary font-bold text-xl mb-3">
+                Call us
+              </h4>
               <p className="max-w-[255px]">
                 <a href="tel:+233503500960">+233 50 350 0960</a>
               </p>
@@ -57,13 +59,15 @@ const ContactDetails = () => {
         <FadeInUp>
           <div className="flex gap-4 py-5">
             {/* icon */}
-            <div className="size-12 shrink-0 rounded-full bg-secondary p-2 flex items-center justify-center">
+            <div className="size-12 shrink-0 rounded-full bg-local-secondary p-2 flex items-center justify-center">
               <MailIcon className="text-white size-full" />
             </div>
 
             {/* content */}
             <div className="">
-              <h4 className="text-primary font-bold text-xl mb-3">Mail us</h4>
+              <h4 className="text-local-primary font-bold text-xl mb-3">
+                Mail us
+              </h4>
               <p className="max-w-[255px]">
                 <a href="mailto:info@silverlineresource.com">
                   info@silverlineresource.com
