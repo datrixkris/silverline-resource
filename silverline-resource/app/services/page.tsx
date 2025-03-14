@@ -44,7 +44,6 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
-  themeColor: "#ffffff",
 };
 
 const Services = () => {
