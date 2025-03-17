@@ -4,6 +4,7 @@ import TeamCard, { TeamCardProps } from "./TeamCard";
 import ScaleNormal from "@/app/components/animations/ScaleNormal";
 import FadeInUp from "@/app/components/animations/FadeInUp";
 import StaggeredFadeUp from "@/app/components/animations/StaggeredFadeUp";
+import TeamsGrid from "./TeamsGrid";
 
 const team: TeamCardProps = {
   name: "Jane Doe",
@@ -33,13 +34,7 @@ const TeamSection = () => {
       </FadeInUp>
 
       {/* teams */}
-      <div className=" grid sm:grid-cols-2 md:grid-cols-3 gap-5">
-        {Array.from({ length: 6 }).map((_, index) => (
-          <StaggeredFadeUp key={index} index={index}>
-            <TeamCard team={team} key={index} />
-          </StaggeredFadeUp>
-        ))}
-      </div>
+      <TeamsGrid />
     </section>
   );
 };

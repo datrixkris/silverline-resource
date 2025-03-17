@@ -39,7 +39,7 @@ const ProjectsSection = () => {
 
       {/* cards */}
       <div className="mt-16">
-        <ProjectsGrid />
+        <ProjectsGrid dataLength={3} />
       </div>
     </section>
   );
