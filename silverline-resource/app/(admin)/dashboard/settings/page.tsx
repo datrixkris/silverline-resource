@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Label } from "@/components/ui/label"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useToast } from "@/hooks/use-toast"
+import Image from "next/image"
 
 export default function SettingsPage() {
   const [generalSettings, setGeneralSettings] = useState({
@@ -71,6 +72,8 @@ export default function SettingsPage() {
         description: "Failed to save settings. Please try again.",
         variant: "destructive",
       })
+      console.error("Error creating product:", error)
+
     } finally {
       setIsSubmitting(false)
     }
@@ -125,7 +128,7 @@ export default function SettingsPage() {
               <div className="grid gap-2">
                 <Label>Site Logo</Label>
                 <div className="flex items-center gap-4">
-                  <img
+                  <Image
                     src={generalSettings.logo || "/placeholder.svg"}
                     alt="Site Logo"
                     className="h-16 w-16 rounded-md object-cover"
@@ -309,7 +312,7 @@ export default function SettingsPage() {
                   Keep this key secret. It provides full access to your CMS.
                 </p>
               </div>
-              <div className="grid gap-2">
+              {/* <div className="grid gap-2">
                 <Label htmlFor="webhook-url">Webhook URL</Label>
                 <Input
                   id="webhook-url"
@@ -321,7 +324,7 @@ export default function SettingsPage() {
                 <p className="text-xs text-muted-foreground">
                   We'll send POST requests to this URL when events occur in your CMS.
                 </p>
-              </div>
+              </div> */}
             </CardContent>
             <CardFooter>
               <Button onClick={() => handleSaveSettings("api")} disabled={isSubmitting}>

@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -69,6 +68,8 @@ export default function BlogPage() {
         description: "Something went wrong. Please try again.",
         variant: "destructive",
       });
+      console.error("Error creating product:", error)
+
     },
   });
 
@@ -92,6 +93,8 @@ export default function BlogPage() {
         description: "Something went wrong. Please try again.",
         variant: "destructive",
       });
+      console.error("Error creating product:", error)
+
     },
   });
 

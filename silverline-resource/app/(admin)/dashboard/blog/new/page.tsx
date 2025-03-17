@@ -61,6 +61,8 @@ export default function NewPostPage() {
         description: "Could not upload image. Please try again.",
         variant: "destructive",
       });
+      console.error("Error creating blogs:", error)
+
       return null;
     }
   };
@@ -85,6 +87,8 @@ export default function NewPostPage() {
         description: "Failed to create post. Please try again.",
         variant: "destructive",
       });
+      console.error("Error :", error)
+
     },
   });
 

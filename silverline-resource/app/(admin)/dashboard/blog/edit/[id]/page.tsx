@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -25,36 +25,58 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
 import { fetchPost, updatePost, Post } from "@/app/api/posts";
-import { use } from "react";
+
 
 export default function EditPostPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id } = use(params);
-  const [post, setPost] = useState({
-    title: "",
-    image: "" as string | File,
-    content: "",
-    status: "",
-  });
+  const { id } = use(params); // Note: Ensure this works with Suspense or awaits the Promise correctly
   const router = useRouter();
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  // Fetch post data
+  // Define all Hooks at the top
+  const [post, setPost] = useState({
+    title: "",
+    image: "" as string | File,
+    content: "",
+    status: "" as "published" | "draft" | "",
+  });
+
   const { data, isLoading, error } = useQuery<Post, Error>({
     queryKey: ["post", id],
     queryFn: () => fetchPost(id),
   });
 
-  // Update state when data is successfully fetched (only once)
-  if (data && !isLoading && post.title === "" && post.content === "") {
+  const updatePostMutation = useMutation({
+    mutationFn: (postData: Omit<Post, "id" | "createdAt">) =>
+      updatePost(id, postData),
+    onSuccess: (updatedPost) => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.setQueryData(["post", id], updatedPost);
+      toast({
+        title: "Post Updated",
+        description: `"${updatedPost.title}" has been updated successfully.`,
+      });
+      router.push("/dashboard/blog");
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to update post. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Set initial post data when fetched (useEffect or similar logic could also work)
+  if (data && post.title === "" && post.content === "") {
     setPost(data);
   }
 
-  // Handle error case
+  // Early returns after all Hooks are called
   if (error) {
     toast({
       title: "Error",
@@ -65,7 +87,18 @@ export default function EditPostPage({
     return null;
   }
 
-  // Upload image to Cloudinary if a new file is selected
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-[calc(100vh-200px)]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-2 text-sm text-muted-foreground">Loading post...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Image upload function
   const uploadImageToCloudinary = async (
     file: File
   ): Promise<string | null> => {
@@ -95,38 +128,17 @@ export default function EditPostPage({
         description: "Could not upload image. Please try again.",
         variant: "destructive",
       });
+      console.error("Error uploading image:", error);
       return null;
     }
   };
 
-  // Update post mutation
-  const updatePostMutation = useMutation({
-    mutationFn: (postData: Omit<Post, "id" | "createdAt">) =>
-      updatePost(id, postData),
-    onSuccess: (updatedPost) => {
-      queryClient.invalidateQueries({ queryKey: ["posts"] });
-      queryClient.setQueryData(["post", id], updatedPost);
-      toast({
-        title: "Post Updated",
-        description: `"${updatedPost.title}" has been updated successfully.`,
-      });
-      router.push("/dashboard/blog");
-    },
-    onError: () => {
-      toast({
-        title: "Error",
-        description: "Failed to update post. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  // Type guard to check if image is a File
+  // Type guard for File
   const isFile = (image: string | File): image is File => {
     return image instanceof File;
   };
 
-  // Handle form submission
+  // Form submission handler
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -150,17 +162,7 @@ export default function EditPostPage({
     updatePostMutation.mutate(postData);
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-[calc(100vh-200px)]">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-2 text-sm text-muted-foreground">Loading post...</p>
-        </div>
-      </div>
-    );
-  }
-
+  // Render the form
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
@@ -176,7 +178,6 @@ export default function EditPostPage({
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {/* Title Input */}
             <div className="grid gap-2">
               <Label htmlFor="title">Title</Label>
               <Input
@@ -188,7 +189,6 @@ export default function EditPostPage({
               />
             </div>
 
-            {/* Image Selection */}
             <div className="grid gap-2">
               <Label htmlFor="image">Image</Label>
               <Input
@@ -212,7 +212,6 @@ export default function EditPostPage({
               )}
             </div>
 
-            {/* Content Input */}
             <div className="grid gap-2">
               <Label htmlFor="content">Content</Label>
               <Textarea
@@ -228,7 +227,6 @@ export default function EditPostPage({
               </p>
             </div>
 
-            {/* Status Selection */}
             <div className="grid gap-2">
               <Label htmlFor="status">Status</Label>
               <Select
@@ -266,3 +264,5 @@ export default function EditPostPage({
     </div>
   );
 }
+
+

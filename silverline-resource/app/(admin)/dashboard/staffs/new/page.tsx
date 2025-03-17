@@ -31,6 +31,7 @@ export default function NewStaffPage() {
       return data.secure_url;
     } catch (error) {
       toast({ title: "Upload Failed", description: "Could not upload image.", variant: "destructive" });
+      console.error("Error creating product:", error)
       return null;
     }
   };

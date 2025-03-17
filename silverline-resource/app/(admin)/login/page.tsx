@@ -56,6 +56,7 @@ export default function LoginPage() {
 
       router.push("/dashboard");
     } catch (error) {
+      console.error("Error creating product:", error)
       toast({
         title: "Login failed",
         description: "Please check your credentials and try again.",

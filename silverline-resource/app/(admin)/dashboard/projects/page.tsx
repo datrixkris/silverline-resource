@@ -10,7 +10,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -29,7 +28,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import {
   MoreHorizontal,
@@ -37,7 +35,6 @@ import {
   Trash2,
   Search,
   FolderPlus,
-  Calendar,
 } from "lucide-react";
 import { fetchProjects, createProject, updateProject, deleteProject, Project } from "@/app/api/projects";
 
@@ -80,6 +77,8 @@ export default function ProjectsPage() {
         description: "Failed to create project. Please try again.",
         variant: "destructive",
       });
+      console.error("Error creating product:", error)
+
     },
   });
 
@@ -150,6 +149,8 @@ export default function ProjectsPage() {
         description: "Could not upload image. Please try again.",
         variant: "destructive",
       });
+      console.error("Error creating product:", error)
+
       return null;
     }
   };
