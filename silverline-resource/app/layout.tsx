@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Providers } from "@/Provider/providers";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -45,8 +46,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-[Futura] antialiased`}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+    
+        <body className={`font-[Futura] antialiased`}>  <Providers>{children} </Providers></body>
+     
     </html>
   );
 }
