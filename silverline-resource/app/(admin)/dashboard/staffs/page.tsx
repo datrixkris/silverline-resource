@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
-import { MoreHorizontal, Pencil, Trash2, Search, UserPlus } from "lucide-react";
+import { MoreHorizontal, Trash2, Search, UserPlus } from "lucide-react";
 import Link from "next/link";
 import { fetchStaff, deleteStaff, Staff } from "@/app/api/staff";
 

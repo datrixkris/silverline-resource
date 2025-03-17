@@ -84,6 +84,7 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
       const data = await response.json();
       return data.secure_url;
     } catch (error) {
+    
       toast({
         title: "Upload Failed",
         description: "Could not upload image. Please try again.",

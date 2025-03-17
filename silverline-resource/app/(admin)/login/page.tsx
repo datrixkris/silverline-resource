@@ -31,20 +31,12 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      // In a real app, this would be an API call
-      // const response = await fetch('/api/login', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ email, password }),
-      // })
-
       const response = await api.post("/users/login", {
         email,
         password,
       });
 
-      // Mock successful login
-      // await new Promise((resolve) => setTimeout(resolve, 1000));
+  
 
       // Store auth token in localStorage
       localStorage.setItem("cms-auth-token", response.data.token);
