@@ -1,156 +1,148 @@
-"use client"
+"use client";
 
-import type React from "react"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import Image from "next/image";
+import { fetchPost, updatePost, Post } from "@/app/api/posts";
+import { use } from "react";
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Label } from "@/components/ui/label"
-import { useToast } from "@/hooks/use-toast"
-
-// Mock blog post data (same as in blog/page.tsx)
-const mockPosts = [
-  {
-    id: "1",
-    title: "Getting Started with Next.js",
-    excerpt: "Learn how to build modern web applications with Next.js and React.",
-    content: "Next.js is a React framework that enables server-side rendering and static site generation...",
-    image: "/placeholder.svg?height=200&width=300&text=Next.js",
-    author: "John Doe",
-    authorImage: "/placeholder.svg?height=40&width=40&text=JD",
-    category: "Development",
-    status: "published",
-    publishedAt: "2023-01-15",
-    views: 1250,
-    comments: 8,
-  },
-  {
-    id: "2",
-    title: "Mastering CSS Grid Layout",
-    excerpt: "A comprehensive guide to using CSS Grid for modern web layouts.",
-    content: "CSS Grid Layout is a two-dimensional layout system designed specifically for the web...",
-    image: "/placeholder.svg?height=200&width=300&text=CSS+Grid",
-    author: "Jane Smith",
-    authorImage: "/placeholder.svg?height=40&width=40&text=JS",
-    category: "Design",
-    status: "published",
-    publishedAt: "2023-02-20",
-    views: 980,
-    comments: 5,
-  },
-  {
-    id: "3",
-    title: "Introduction to TypeScript",
-    excerpt: "Why TypeScript is becoming essential for JavaScript developers.",
-    content:
-      "TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale...",
-    image: "/placeholder.svg?height=200&width=300&text=TypeScript",
-    author: "Mike Johnson",
-    authorImage: "/placeholder.svg?height=40&width=40&text=MJ",
-    category: "Development",
-    status: "draft",
-    publishedAt: null,
-    views: 0,
-    comments: 0,
-  },
-  {
-    id: "4",
-    title: "Responsive Design Best Practices",
-    excerpt: "Tips and tricks for creating responsive websites that work on any device.",
-    content:
-      "Responsive web design is an approach to web design that makes web pages render well on a variety of devices and window or screen sizes...",
-    image: "/placeholder.svg?height=200&width=300&text=Responsive",
-    author: "Sarah Williams",
-    authorImage: "/placeholder.svg?height=40&width=40&text=SW",
-    category: "Design",
-    status: "published",
-    publishedAt: "2023-03-10",
-    views: 1560,
-    comments: 12,
-  },
-]
-
-export default function EditPostPage({ params }: { params: { id: string } }) {
+export default function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const [post, setPost] = useState({
     title: "",
-    excerpt: "",
+    image: "" as string | File, 
     content: "",
-    category: "",
-    status: "draft",
-  })
-  const [isLoading, setIsLoading] = useState(true)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const router = useRouter()
-  const { toast } = useToast()
-  const { id } = params
+    status: "",
+  });
+  const router = useRouter();
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    // In a real app, this would be an API call
-    // const fetchPost = async () => {
-    //   const response = await fetch(`/api/posts/${id}`)
-    //   const data = await response.json()
-    //   setPost(data)
-    //   setIsLoading(false)
-    // }
-    // fetchPost()
+  // Fetch post data
+  const { data, isLoading, error } = useQuery<Post, Error>({
+    queryKey: ["post", id],
+    queryFn: () => fetchPost(id),
+  });
 
-    // Using mock data for demonstration
-    const foundPost = mockPosts.find((p) => p.id === id)
-    if (foundPost) {
-      setPost({
-        title: foundPost.title,
-        excerpt: foundPost.excerpt,
-        content: foundPost.content,
-        category: foundPost.category,
-        status: foundPost.status,
-      })
-    } else {
-      toast({
-        title: "Post not found",
-        description: "The requested post could not be found.",
-        variant: "destructive",
-      })
-      router.push("/dashboard/blog")
-    }
-    setIsLoading(false)
-  }, [id, router, toast])
+  // Update state when data is successfully fetched (only once)
+  if (data && !isLoading && post.title === "" && post.content === "") {
+    setPost(data);
+  }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+  // Handle error case
+  if (error) {
+    toast({
+      title: "Error",
+      description: "Failed to fetch post data.",
+      variant: "destructive",
+    });
+    router.push("/dashboard/blog");
+    return null;
+  }
+
+  // Upload image to Cloudinary if a new file is selected
+  const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append(
+      "upload_preset",
+      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "default_preset"
+    );
 
     try {
-      // In a real app, this would be an API call
-      // const response = await fetch(`/api/posts/${id}`, {
-      //   method: 'PUT',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(post),
-      // })
-      // const data = await response.json()
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
-      // Mock successful update
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      if (!response.ok) throw new Error("Cloudinary upload failed");
 
-      toast({
-        title: "Post updated",
-        description: `"${post.title}" has been updated successfully.`,
-      })
-
-      router.push("/dashboard/blog")
+      const data = await response.json();
+      return data.secure_url;
     } catch (error) {
+      toast({
+        title: "Upload Failed",
+        description: "Could not upload image. Please try again.",
+        variant: "destructive",
+      });
+      return null;
+    }
+  };
+
+  // Update post mutation
+  const updatePostMutation = useMutation({
+    mutationFn: (postData: Omit<Post, "id" | "createdAt">) =>
+      updatePost(id, postData),
+    onSuccess: (updatedPost) => {
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.setQueryData(["post", id], updatedPost);
+      toast({
+        title: "Post Updated",
+        description: `"${updatedPost.title}" has been updated successfully.`,
+      });
+      router.push("/dashboard/blog");
+    },
+    onError: () => {
       toast({
         title: "Error",
         description: "Failed to update post. Please try again.",
         variant: "destructive",
-      })
-    } finally {
-      setIsSubmitting(false)
+      });
+    },
+  });
+
+  // Type guard to check if image is a File
+  const isFile = (image: string | File): image is File => {
+    return image instanceof File;
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    let imageUrl = typeof post.image === "string" ? post.image : "";
+
+    if (isFile(post.image)) {
+      toast({ title: "Uploading Image...", description: "Please wait." });
+      const uploadedUrl = await uploadImageToCloudinary(post.image);
+      if (!uploadedUrl) return;
+      imageUrl = uploadedUrl;
     }
-  }
+
+    const postData: Omit<Post, "id" | "createdAt"> = {
+      title: post.title || "",
+      excerpt: post.content?.substring(0, 100) || "",
+      content: post.content || "",
+      image: imageUrl,
+      status: (post.status as "published" | "draft") || "draft",
+    };
+
+    updatePostMutation.mutate(postData);
+  };
 
   if (isLoading) {
     return (
@@ -160,7 +152,7 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
           <p className="mt-2 text-sm text-muted-foreground">Loading post...</p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -173,83 +165,98 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
         <Card>
           <CardHeader>
             <CardTitle>Edit Post Details</CardTitle>
-            <CardDescription>Update your blog post content and settings.</CardDescription>
+            <CardDescription>
+              Update your blog post content and settings.
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
+            {/* Title Input */}
             <div className="grid gap-2">
               <Label htmlFor="title">Title</Label>
               <Input
                 id="title"
                 placeholder="Enter post title"
-                value={post.title}
+                value={post.title || ""}
                 onChange={(e) => setPost({ ...post, title: e.target.value })}
                 required
               />
             </div>
+
+            {/* Image Selection */}
             <div className="grid gap-2">
-              <Label htmlFor="excerpt">Excerpt</Label>
-              <Textarea
-                id="excerpt"
-                placeholder="Brief summary of the post"
-                rows={2}
-                value={post.excerpt}
-                onChange={(e) => setPost({ ...post, excerpt: e.target.value })}
-                required
+              <Label htmlFor="image">Image</Label>
+              <Input
+                id="image"
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const newFile = e.target.files?.[0];
+                  setPost({ ...post, image: newFile || post.image });
+                }}
               />
+              {typeof post.image === "string" && post.image && (
+                <div className="relative w-40 h-24 mt-2">
+                  <Image
+                    src={post.image}
+                    alt="Current Image"
+                    fill
+                    className="object-cover rounded"
+                  />
+                </div>
+              )}
             </div>
+
+            {/* Content Input */}
             <div className="grid gap-2">
               <Label htmlFor="content">Content</Label>
               <Textarea
                 id="content"
                 placeholder="Write your post content here..."
                 rows={10}
-                value={post.content}
+                value={post.content || ""}
                 onChange={(e) => setPost({ ...post, content: e.target.value })}
                 required
               />
-              <p className="text-xs text-muted-foreground">Tip: You can use Markdown formatting for rich text.</p>
+              <p className="text-xs text-muted-foreground">
+                Tip: You can use Markdown formatting for rich text.
+              </p>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="category">Category</Label>
-                <Select value={post.category} onValueChange={(value) => setPost({ ...post, category: value })} required>
-                  <SelectTrigger id="category">
-                    <SelectValue placeholder="Select category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Development">Development</SelectItem>
-                    <SelectItem value="Design">Design</SelectItem>
-                    <SelectItem value="Marketing">Marketing</SelectItem>
-                    <SelectItem value="Business">Business</SelectItem>
-                    <SelectItem value="Technology">Technology</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="status">Status</Label>
-                <Select value={post.status} onValueChange={(value) => setPost({ ...post, status: value })}>
-                  <SelectTrigger id="status">
-                    <SelectValue placeholder="Select status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="draft">Draft</SelectItem>
-                    <SelectItem value="published">Published</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+
+            {/* Status Selection */}
+            <div className="grid gap-2">
+              <Label htmlFor="status">Status</Label>
+              <Select
+                value={post.status}
+                onValueChange={(value) =>
+                  setPost({ ...post, status: value as "published" | "draft" })
+                }
+              >
+                <SelectTrigger id="status">
+                  <SelectValue placeholder="Select status" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="draft">Draft</SelectItem>
+                  <SelectItem value="published">Published</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </CardContent>
+
           <CardFooter className="flex justify-between">
-            <Button variant="outline" type="button" onClick={() => router.back()}>
+            <Button
+              variant="outline"
+              type="button"
+              onClick={() => router.back()}
+              disabled={updatePostMutation.isPending}
+            >
               Cancel
             </Button>
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Saving..." : "Save Changes"}
+            <Button type="submit" disabled={updatePostMutation.isPending}>
+              {updatePostMutation.isPending ? "Saving..." : "Save Changes"}
             </Button>
           </CardFooter>
         </Card>
       </form>
     </div>
-  )
+  );
 }
-

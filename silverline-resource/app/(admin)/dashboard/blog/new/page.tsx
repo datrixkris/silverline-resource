@@ -1,61 +1,115 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Label } from "@/components/ui/label"
-import { useToast } from "@/hooks/use-toast"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import { createPost, Post } from "@/app/api/posts";
 
 export default function NewPostPage() {
   const [post, setPost] = useState({
     title: "",
-    excerpt: "",
+    image: null as File | null,
     content: "",
-    category: "",
-    status: "draft",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const router = useRouter()
-  const { toast } = useToast()
+    status: "published" as "published" | "draft",
+  });
+  const router = useRouter();
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+  // Upload image to Cloudinary and return the URL
+  const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "default_preset");
 
     try {
-      // In a real app, this would be an API call
-      // const response = await fetch('/api/posts', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(post),
-      // })
-      // const data = await response.json()
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
-      // Mock successful creation
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      if (!response.ok) throw new Error("Cloudinary upload failed");
 
-      toast({
-        title: "Post created",
-        description: `"${post.title}" has been created successfully.`,
-      })
-
-      router.push("/dashboard/blog")
+      const data = await response.json();
+      return data.secure_url;
     } catch (error) {
+      toast({
+        title: "Upload Failed",
+        description: "Could not upload image. Please try again.",
+        variant: "destructive",
+      });
+      return null;
+    }
+  };
+
+  // Create post mutation
+  const createPostMutation = useMutation({
+    mutationFn: async (postData: Omit<Post, 'id' | 'createdAt'>) => {
+      return createPost(postData);
+    },
+    onSuccess: (newPost) => {
+      // Invalidate posts query to refetch the latest data
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      toast({
+        title: "Post Created",
+        description: `"${newPost.title}" has been created successfully.`,
+      });
+      router.push("/dashboard/blog");
+    },
+    onError: (error) => {
       toast({
         title: "Error",
         description: "Failed to create post. Please try again.",
         variant: "destructive",
-      })
-    } finally {
-      setIsSubmitting(false)
+      });
+    },
+  });
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    let imageUrl = "";
+    if (post.image) {
+      toast({ title: "Uploading Image...", description: "Please wait." });
+      imageUrl = (await uploadImageToCloudinary(post.image)) || "";
+      if (!imageUrl) return; // Stop submission if image upload fails
     }
-  }
+
+    // Prepare post data without id and createdAt
+    const postData = {
+      title: post.title,
+      excerpt: post.content.substring(0, 100), // Generate excerpt from content
+      content: post.content,
+      image: imageUrl,
+      status: post.status,
+    };
+
+    createPostMutation.mutate(postData);
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -67,9 +121,12 @@ export default function NewPostPage() {
         <Card>
           <CardHeader>
             <CardTitle>Post Details</CardTitle>
-            <CardDescription>Create a new blog post with rich content.</CardDescription>
+            <CardDescription>
+              Create a new blog post with rich content.
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
+            {/* Title Input */}
             <div className="grid gap-2">
               <Label htmlFor="title">Title</Label>
               <Input
@@ -80,17 +137,24 @@ export default function NewPostPage() {
                 required
               />
             </div>
+
+            {/* Image Selection */}
             <div className="grid gap-2">
-              <Label htmlFor="excerpt">Excerpt</Label>
-              <Textarea
-                id="excerpt"
-                placeholder="Brief summary of the post"
-                rows={2}
-                value={post.excerpt}
-                onChange={(e) => setPost({ ...post, excerpt: e.target.value })}
-                required
+              <Label htmlFor="image">Image</Label>
+              <Input
+                id="image"
+                type="file"
+                accept="image/*"
+                onChange={(e) => setPost({ ...post, image: e.target.files?.[0] || null })}
               />
+              {post.image && (
+                <p className="text-sm text-gray-500">
+                  Image selected: {post.image.name}
+                </p>
+              )}
             </div>
+
+            {/* Content Input */}
             <div className="grid gap-2">
               <Label htmlFor="content">Content</Label>
               <Textarea
@@ -101,27 +165,21 @@ export default function NewPostPage() {
                 onChange={(e) => setPost({ ...post, content: e.target.value })}
                 required
               />
-              <p className="text-xs text-muted-foreground">Tip: You can use Markdown formatting for rich text.</p>
+              <p className="text-xs text-muted-foreground">
+                Tip: You can use Markdown formatting for rich text.
+              </p>
             </div>
+
+            {/* Status Selection */}
             <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-2">
-                <Label htmlFor="category">Category</Label>
-                <Select value={post.category} onValueChange={(value) => setPost({ ...post, category: value })} required>
-                  <SelectTrigger id="category">
-                    <SelectValue placeholder="Select category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="Development">Development</SelectItem>
-                    <SelectItem value="Design">Design</SelectItem>
-                    <SelectItem value="Marketing">Marketing</SelectItem>
-                    <SelectItem value="Business">Business</SelectItem>
-                    <SelectItem value="Technology">Technology</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="grid gap-2">
                 <Label htmlFor="status">Status</Label>
-                <Select value={post.status} onValueChange={(value) => setPost({ ...post, status: value })}>
+                <Select
+                  value={post.status}
+                  onValueChange={(value) =>
+                    setPost({ ...post, status: value as "published" | "draft" })
+                  }
+                >
                   <SelectTrigger id="status">
                     <SelectValue placeholder="Select status" />
                   </SelectTrigger>
@@ -133,17 +191,22 @@ export default function NewPostPage() {
               </div>
             </div>
           </CardContent>
+
           <CardFooter className="flex justify-between">
-            <Button variant="outline" type="button" onClick={() => router.back()}>
+            <Button
+              variant="outline"
+              type="button"
+              onClick={() => router.back()}
+              disabled={createPostMutation.isPending}
+            >
               Cancel
             </Button>
-            <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Creating..." : "Create Post"}
+            <Button type="submit" disabled={createPostMutation.isPending}>
+              {createPostMutation.isPending ? "Creating..." : "Create Post"}
             </Button>
           </CardFooter>
         </Card>
       </form>
     </div>
-  )
+  );
 }
-
