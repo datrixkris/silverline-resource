@@ -27,11 +27,15 @@ import Image from "next/image";
 import { fetchPost, updatePost, Post } from "@/app/api/posts";
 import { use } from "react";
 
-export default function EditPostPage({ params }: { params: Promise<{ id: string }> }) {
+export default function EditPostPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = use(params);
   const [post, setPost] = useState({
     title: "",
-    image: "" as string | File, 
+    image: "" as string | File,
     content: "",
     status: "",
   });
@@ -62,7 +66,9 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
   }
 
   // Upload image to Cloudinary if a new file is selected
-  const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
+  const uploadImageToCloudinary = async (
+    file: File
+  ): Promise<string | null> => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append(
@@ -84,7 +90,6 @@ export default function EditPostPage({ params }: { params: Promise<{ id: string 
       const data = await response.json();
       return data.secure_url;
     } catch (error) {
-    
       toast({
         title: "Upload Failed",
         description: "Could not upload image. Please try again.",
