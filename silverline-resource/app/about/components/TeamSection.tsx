@@ -1,19 +1,19 @@
 import ButtonTitle from "@/app/components/generic/ButtonTitle";
 import React from "react";
-import TeamCard, { TeamCardProps } from "./TeamCard";
+// import { TeamCardProps } from "./TeamCard";
 import ScaleNormal from "@/app/components/animations/ScaleNormal";
 import FadeInUp from "@/app/components/animations/FadeInUp";
-import StaggeredFadeUp from "@/app/components/animations/StaggeredFadeUp";
+// import StaggeredFadeUp from "@/app/components/animations/StaggeredFadeUp";
 import TeamsGrid from "./TeamsGrid";
 
-const team: TeamCardProps = {
-  name: "Jane Doe",
-  role: "Front-End Developer",
-  image: {
-    src: "/images/team-image.png",
-    alt: "Jane Doe - Front-End Developer",
-  },
-};
+// const team: TeamCardProps = {
+//   name: "Jane Doe",
+//   role: "Front-End Developer",
+//   image: {
+//     src: "/images/team-image.png",
+//     alt: "Jane Doe - Front-End Developer",
+//   },
+// };
 
 const TeamSection = () => {
   return (
