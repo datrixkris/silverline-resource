@@ -2,8 +2,8 @@ import axios from "axios";
 // import { useAuthStore } from "../stores/auth-store";
 
 
-// export const baseURL = "https://api.silverlineresource.com/v1/api/";
-export const baseURL = "http://localhost:8000/v1/api/";
+export const baseURL = "https://api.silverlineresource.com/v1/api/";
+// export const baseURL = "http://localhost:8000/v1/api/";
 
 
 export const api = axios.create({
@@ -15,17 +15,21 @@ export const api = axios.create({
 // Add a request interceptor
 api.interceptors.request.use(
   async (config) => {
+    // Retrieve the token from localStorage
     const token = localStorage.getItem("cms-auth-token");
+
+    // If a token exists, add it to the request headers
     if (token) {
-      config.headers.Authorization = token;
+      config.headers.Authorization = `Bearer ${token}`;
     }
-    // console.log("Api request intercepted");
+
+    // Return the modified config object
     return config;
   },
   (error) => {
-    // Do something with request error
+    // Handle request errors
     return Promise.reject(error);
-  },
+  }
 );
 
 // Add a response interceptor

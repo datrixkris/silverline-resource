@@ -1,4 +1,3 @@
-// pages/dashboard/blog.tsx
 "use client";
 
 import { useState } from "react";
@@ -23,6 +22,14 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
   MoreHorizontal,
   Pencil,
   Trash2,
@@ -31,15 +38,30 @@ import {
   Calendar,
   Eye,
 } from "lucide-react";
-import { fetchPosts, deletePost, publishPost, Post } from "@/app/api/posts";
-// import { fetchPosts, deletePost, publishPost, Post } from "@/api/posts";
+import {
+  fetchPosts,
+  deletePost,
+  publishPost,
+  Post,
+  updatePost,
+} from "@/app/api/posts";
+import { Label } from "@/components/ui/label";
 
 export default function BlogPage() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+  // const [isImageUploading, setIsImageUploading] = useState(false);
+  const [editForm, setEditForm] = useState<Omit<Post, "id" | "createdAt"> & { image: string | File }>({
+    title: "",
+    excerpt: "",
+    image: "" as string | File,
+    content: "",
+    status: "draft",
+  });
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  // Fetch posts using TanStack Query
   const {
     data: posts = [],
     isLoading,
@@ -49,7 +71,29 @@ export default function BlogPage() {
     queryFn: fetchPosts,
   });
 
-  // Delete post mutation
+  const publishMutation = useMutation({
+    mutationFn: (id: string) => publishPost(id),
+    onSuccess: (publishedPost) => {
+      queryClient.setQueryData(["posts"], (oldPosts: Post[] | undefined) =>
+        oldPosts?.map((post) =>
+          post.id === publishedPost.id ? publishedPost : post
+        )
+      );
+      toast({
+        title: "Post published",
+        description: `"${publishedPost.title}" has been published.`,
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Error publishing post",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+      console.error("Error publishing post:", error);
+    },
+  });
+
   const deleteMutation = useMutation({
     mutationFn: deletePost,
     onSuccess: (_, id) => {
@@ -68,14 +112,18 @@ export default function BlogPage() {
         description: "Something went wrong. Please try again.",
         variant: "destructive",
       });
-      console.error("Error creating product:", error)
-
+      console.error("Error deleting post:", error);
     },
   });
 
-  // Publish post mutation
-  const publishMutation = useMutation({
-    mutationFn: publishPost,
+  const updateMutation = useMutation({
+    mutationFn: ({
+      id,
+      postData,
+    }: {
+      id: string;
+      postData: Omit<Post, "id" | "createdAt">;
+    }) => updatePost(id, postData),
     onSuccess: (updatedPost) => {
       queryClient.setQueryData(["posts"], (oldPosts: Post[] | undefined) =>
         oldPosts?.map((post) =>
@@ -83,18 +131,18 @@ export default function BlogPage() {
         )
       );
       toast({
-        title: "Post published",
-        description: `"${updatedPost.title}" is now live.`,
+        title: "Post updated",
+        description: `"${updatedPost.title}" has been saved.`,
       });
+      setIsEditDialogOpen(false);
     },
     onError: (error) => {
       toast({
-        title: "Error publishing post",
+        title: "Error updating post",
         description: "Something went wrong. Please try again.",
         variant: "destructive",
       });
-      console.error("Error creating product:", error)
-
+      console.error("Error updating post:", error);
     },
   });
 
@@ -103,6 +151,82 @@ export default function BlogPage() {
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleEditClick = (post: Post) => {
+    setSelectedPost(post);
+    setEditForm({
+      title: post.title,
+      excerpt: post.excerpt,
+      image: post.image,
+      content: post.content,
+      status: post.status,
+    });
+    setIsEditDialogOpen(true);
+  };
+
+  const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append(
+      "upload_preset",
+      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "default_preset"
+    );
+
+    try {
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response.ok) throw new Error("Cloudinary upload failed");
+      const data = await response.json();
+      return data.secure_url;
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Upload Failed",
+        description: "Could not upload image. Please try again.",
+        variant: "destructive",
+      });
+      return null;
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEditForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    let imageUrl = editForm.image;
+
+    if (editForm.image instanceof File) {
+      // setIsImageUploading(true);
+      toast({ title: "Uploading Image...", description: "Please wait." });
+      const uploadedUrl = await uploadImageToCloudinary(editForm.image);
+      // setIsImageUploading(false);
+
+      if (!uploadedUrl) return;
+      imageUrl = uploadedUrl;
+    }
+
+    const postData: Omit<Post, "id" | "createdAt"> = {
+      title: editForm.title,
+      excerpt: editForm.content.substring(0, 100), // Generate excerpt from content
+      content: editForm.content,
+      image: imageUrl,
+      status: editForm.status,
+    };
+
+    if (selectedPost) {
+      updateMutation.mutate({ id: selectedPost.id, postData });
+    }
+  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -147,7 +271,7 @@ export default function BlogPage() {
             <Card key={post.id} className="overflow-hidden">
               <div className="relative h-48 w-full">
                 <Image
-                  src={post.image || "/placeholder.svg"}
+                  src={typeof post.image === "string" ? post.image : "/placeholder.svg"}
                   alt={post.title}
                   fill
                   className="object-cover"
@@ -166,17 +290,18 @@ export default function BlogPage() {
                 <div className="flex items-center ml-auto">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        aria-label="Open menu"
+                      >
                         <MoreHorizontal className="h-4 w-4" />
-                        <span className="sr-only">Open menu</span>
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem asChild>
-                        <Link href={`/dashboard/blog/edit/${post.id}`}>
-                          <Pencil className="mr-2 h-4 w-4" />
-                          Edit
-                        </Link>
+                      <DropdownMenuItem onClick={() => handleEditClick(post)}>
+                        <Pencil className="mr-2 h-4 w-4" />
+                        Edit
                       </DropdownMenuItem>
                       {post.status !== "published" && (
                         <DropdownMenuItem
@@ -213,6 +338,94 @@ export default function BlogPage() {
           ))
         )}
       </div>
+
+      {selectedPost && (
+        <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Edit Post</DialogTitle>
+              <DialogDescription>
+                Update the details of your blog post below.
+              </DialogDescription>
+            </DialogHeader>
+            <form onSubmit={handleSubmit} className="grid gap-4 py-4">
+              <div className="grid gap-2">
+                <Label htmlFor="title">Title</Label>
+                <Input
+                  id="title"
+                  name="title"
+                  value={editForm.title}
+                  onChange={handleInputChange}
+                  placeholder="Enter post title"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="content">Content</Label>
+                <Input
+                  id="content"
+                  name="content"
+                  value={editForm.content}
+                  onChange={handleInputChange}
+                  placeholder="Enter post content"
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="image">Image</Label>
+                <Input
+                  id="image"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setEditForm((prev) => ({ ...prev, image: file }));
+                    }
+                  }}
+                />
+                {typeof editForm.image === "string" && editForm.image && (
+                  <div className="relative w-40 h-24 mt-2">
+                    <Image
+                      src={editForm.image}
+                      alt="Current Image"
+                      fill
+                      className="object-cover rounded"
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="status">Status</Label>
+                <select
+                  id="status"
+                  name="status"
+                  value={editForm.status}
+                  onChange={(e) =>
+                    setEditForm((prev) => ({
+                      ...prev,
+                      status: e.target.value as "published" | "draft",
+                    }))
+                  }
+                  className="p-2 border rounded"
+                >
+                  <option value="draft">Draft</option>
+                  <option value="published">Published</option>
+                </select>
+              </div>
+            </form>
+            <DialogFooter>
+              <Button
+                variant="outline"
+                onClick={() => setIsEditDialogOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button type="submit" onClick={handleSubmit}>
+                Save Changes
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 }
