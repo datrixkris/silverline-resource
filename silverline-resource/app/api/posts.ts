@@ -5,7 +5,7 @@ export interface Post {
   title: string;
   excerpt: string;
   content: string;
-  image: string;
+  image: string | File; 
   status: "published" | "draft";
   createdAt: string;
 }

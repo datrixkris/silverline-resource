@@ -29,7 +29,7 @@ const NavBar = ({ type }: { type?: "white" }) => {
       }
     };
 
-    checkScroll(); // Check scroll position on mount
+    checkScroll();
     window.addEventListener("scroll", checkScroll);
     return () => window.removeEventListener("scroll", checkScroll);
   }, []);

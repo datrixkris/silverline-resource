@@ -4,7 +4,7 @@ export interface Staff {
   id: string;
   name: string;
   position: string;
-  picture: string;
+  picture: string | File;
 }
 
 export const fetchStaff = async (): Promise<Staff[]> => {
