@@ -69,7 +69,7 @@ const NavBar = ({ type }: { type?: "white" }) => {
               <Link
                 href={link.link}
                 key={index}
-                className={`hover:text-local-primary font-medium ${
+                className={`hover:text-local-primary capitalize font-medium ${
                   pathname === link.link ? "text-local-primary" : ""
                 }`}
               >

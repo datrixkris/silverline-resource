@@ -14,7 +14,7 @@ const TeamsGrid = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await api.get("staffs");
+        const response = await api.get("staff");
         setTeams(response.data);
         setLoading(false);
       } catch (error) {
@@ -40,11 +40,11 @@ const TeamsGrid = () => {
             ))}
           </div>
 
-          {teams.length < 1 && (
+          {/* {teams.length < 1 && (
             <p className="text-gray-300 text-2xl text-center">
               No data to display
             </p>
-          )}
+          )} */}
         </div>
       )}
     </section>

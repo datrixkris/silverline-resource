@@ -2,9 +2,10 @@ import React from "react";
 import Image from "next/image";
 
 export interface TeamCardProps {
+  id: number;
   name: string;
-  role: string;
-  image: { src: string; alt: string };
+  position: string;
+  picture: string;
 }
 
 const TeamCard = ({ team }: { team: TeamCardProps }) => {
@@ -13,8 +14,8 @@ const TeamCard = ({ team }: { team: TeamCardProps }) => {
       {/* image */}
       <div className="aspect-square rounded-[30px] overflow-clip">
         <Image
-          src={team.image.src}
-          alt={team.image.alt}
+          src={team.picture}
+          alt={team.name}
           width={400}
           height={400}
           className="w-full h-full object-center"
@@ -23,8 +24,8 @@ const TeamCard = ({ team }: { team: TeamCardProps }) => {
 
       {/* content */}
       <div className="text-center p-6">
-        <h4 className="font-bold mb-4">{team.role}</h4>
-        <p className="">{team.role}</p>
+        <h4 className="font-bold mb-4">{team.name}</h4>
+        <p className="">{team.position}</p>
       </div>
     </div>
   );

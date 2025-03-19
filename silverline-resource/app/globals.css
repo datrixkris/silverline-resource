@@ -86,6 +86,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Hide scrollbar for Chrome, Safari, Edge */
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;

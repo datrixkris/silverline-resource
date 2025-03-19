@@ -10,11 +10,11 @@ import MailIcon from "../icons/MailIcon";
 import FadeInUp from "../animations/FadeInUp";
 
 const services = [
-  { name: "Single and Multi-storey Construction" },
-  { name: "Complex Building Construction" },
-  { name: "Civil Engineering" },
-  { name: "Renovation" },
-  { name: "Logistics & Procurement" },
+  { name: "Single and Multi-storey Construction", link: "/services#services" },
+  { name: "Complex Building Construction", link: "/services#services" },
+  { name: "Civil Engineering", link: "/services#services" },
+  { name: "Renovation", link: "/services#services" },
+  { name: "Logistics & Procurement", link: "/services#services" },
 ];
 
 const links = [
@@ -64,9 +64,15 @@ const Footer = () => {
                 <h3 className="title-local-primary mb-5 text-2xl">Services</h3>
 
                 {services.map((service, index) => (
-                  <p key={index} className="mb-1">
+                  <a
+                    href={service.link}
+                    key={index}
+                    className={`mb-1 block w-fit hover:text-local-primary capitalize ${
+                      pathname === service.link ? "text-local-primary" : ""
+                    }`}
+                  >
                     {service.name}
-                  </p>
+                  </a>
                 ))}
               </FadeInUp>
             </div>
@@ -80,7 +86,7 @@ const Footer = () => {
                   <Link
                     href={link.link}
                     key={index}
-                    className={`mb-1 block w-fit hover:text-local-primary ${
+                    className={`mb-1 block w-fit hover:text-local-primary capitalize ${
                       pathname === link.link ? "text-local-primary" : ""
                     }`}
                   >

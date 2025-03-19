@@ -36,7 +36,7 @@ const ServicesSection = () => {
       </div>
 
       <div className="bg-local-background space-y-16 py-16 pb-24">
-        <div className="maximum-width">
+        <div className="maximum-width scroll-mt-28" id="services">
           <WhatWeDoGrid />
         </div>
 

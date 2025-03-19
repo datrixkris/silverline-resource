@@ -2,9 +2,10 @@ import React from "react";
 import Image from "next/image";
 
 export interface ProjectCardProps {
+  id: number;
   title: string;
   description: string;
-  image: { src: string; alt: string };
+  image: string;
 }
 
 const ProjectsCard = ({ project }: { project: ProjectCardProps }) => {
@@ -13,8 +14,8 @@ const ProjectsCard = ({ project }: { project: ProjectCardProps }) => {
       {/* image */}
       <div className="aspect-square rounded-[30px] overflow-clip">
         <Image
-          src={project.image.src}
-          alt={project.image.alt}
+          src={project.image}
+          alt={project.title}
           width={400}
           height={400}
           className="w-full h-full object-center"
