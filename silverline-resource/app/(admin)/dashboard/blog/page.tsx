@@ -46,6 +46,7 @@ import {
   updatePost,
 } from "@/app/api/posts";
 import { Label } from "@/components/ui/label";
+import Loader from "@/components/loader";
 
 export default function BlogPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -229,7 +230,7 @@ export default function BlogPage() {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader/>;
   }
 
   if (error) {

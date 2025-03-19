@@ -20,6 +20,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
+import Loader from "@/components/loader";
 
 export default function StaffPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -154,7 +155,7 @@ export default function StaffPage() {
       member.position.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  if (isLoading) return <div>Loading staff...</div>;
+  if (isLoading) return <Loader/>;
   if (error) return <div>Error loading staff: {error.message}</div>;
 
   return (
