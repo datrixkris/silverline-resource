@@ -48,11 +48,9 @@ const Footer = () => {
               </div>
 
               <p className=" leading-8">
-                Silverline Resource Company Limited provides many services and
-                products to its prospective clients in the Ghanaian market and
-                wishes to extend its businesses to other African countries by
-                2022. The following are its major businesses it undertakes as a
-                company...
+                Silverline Resource Company Limited provides many services to
+                its prospective clients in the Ghanaian with steps of developing
+                in other African countries.
               </p>
             </FadeInUp>
           </div>
