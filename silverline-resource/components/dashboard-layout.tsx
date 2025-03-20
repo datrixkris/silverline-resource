@@ -18,6 +18,7 @@ import {
   Menu,
   Moon,
   Sun,
+  Settings,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useTheme } from "next-themes";
@@ -78,7 +79,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     { name: "Projects", href: "/dashboard/projects", icon: FolderKanban },
     // { name: "Blog", href: "/dashboard/blog", icon: FileText },
     { name: "Staffs", href: "/dashboard/staffs", icon: Users },
-    // { name: "Settings", href: "/dashboard/settings", icon: Settings },
+    { name: "Settings", href: "/dashboard/settings", icon: Settings },
   ];
 
   const isActive = (path: string) => {
