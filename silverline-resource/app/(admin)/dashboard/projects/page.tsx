@@ -36,7 +36,14 @@ import {
   Search,
   FolderPlus,
 } from "lucide-react";
-import { fetchProjects, createProject, updateProject, deleteProject, Project } from "@/app/api/projects";
+import {
+  fetchProjects,
+  createProject,
+  updateProject,
+  deleteProject,
+  Project,
+} from "@/app/api/projects";
+import Loader from "@/components/loader";
 
 export default function ProjectsPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -53,7 +60,11 @@ export default function ProjectsPage() {
   const queryClient = useQueryClient();
 
   // Fetch projects
-  const { data: projects = [], isLoading, error } = useQuery<Project[], Error>({
+  const {
+    data: projects = [],
+    isLoading,
+    error,
+  } = useQuery<Project[], Error>({
     queryKey: ["projects"],
     queryFn: fetchProjects,
   });
@@ -77,8 +88,7 @@ export default function ProjectsPage() {
         description: "Failed to create project. Please try again.",
         variant: "destructive",
       });
-      console.error("Error creating product:", error)
-
+      console.error("Error creating product:", error);
     },
   });
 
@@ -124,7 +134,9 @@ export default function ProjectsPage() {
   });
 
   // Upload image to Cloudinary
-  const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
+  const uploadImageToCloudinary = async (
+    file: File
+  ): Promise<string | null> => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append(
@@ -149,7 +161,7 @@ export default function ProjectsPage() {
         description: "Could not upload image. Please try again.",
         variant: "destructive",
       });
-      console.error("Error creating product:", error)
+      console.error("Error creating product:", error);
 
       return null;
     }
@@ -184,7 +196,8 @@ export default function ProjectsPage() {
   const handleEditProject = async () => {
     if (!currentProject) return;
 
-    let imageUrl = typeof currentProject.image === "string" ? currentProject.image : "";
+    let imageUrl =
+      typeof currentProject.image === "string" ? currentProject.image : "";
     if (isFile(currentProject.image)) {
       toast({ title: "Uploading Image...", description: "Please wait." });
       const uploadedUrl = await uploadImageToCloudinary(currentProject.image);
@@ -205,7 +218,7 @@ export default function ProjectsPage() {
   };
 
   if (isLoading) {
-    return <div>Loading projects...</div>;
+    return <Loader />;
   }
 
   if (error) {
@@ -246,7 +259,7 @@ export default function ProjectsPage() {
               <CardHeader className="p-0">
                 <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
                   <Image
-                    src={project.image || "/placeholder.svg"}
+                    src={project.image}
                     alt={project.title}
                     fill
                     className="object-cover"
@@ -312,7 +325,10 @@ export default function ProjectsPage() {
                 type="file"
                 accept="image/*"
                 onChange={(e) =>
-                  setNewProject({ ...newProject, image: e.target.files?.[0] || "" })
+                  setNewProject({
+                    ...newProject,
+                    image: e.target.files?.[0] || "",
+                  })
                 }
               />
             </div>
@@ -321,7 +337,9 @@ export default function ProjectsPage() {
               <Input
                 id="title"
                 value={newProject.title}
-                onChange={(e) => setNewProject({ ...newProject, title: e.target.value })}
+                onChange={(e) =>
+                  setNewProject({ ...newProject, title: e.target.value })
+                }
               />
             </div>
             <div className="grid gap-2">
@@ -337,11 +355,19 @@ export default function ProjectsPage() {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsCreateDialogOpen(false)}>
+            <Button
+              variant="outline"
+              onClick={() => setIsCreateDialogOpen(false)}
+            >
               Cancel
             </Button>
-            <Button onClick={handleCreateProject} disabled={createProjectMutation.isPending}>
-              {createProjectMutation.isPending ? "Creating..." : "Create Project"}
+            <Button
+              onClick={handleCreateProject}
+              disabled={createProjectMutation.isPending}
+            >
+              {createProjectMutation.isPending
+                ? "Creating..."
+                : "Create Project"}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -352,7 +378,9 @@ export default function ProjectsPage() {
         <DialogContent className="sm:max-w-[500px]">
           <DialogHeader>
             <DialogTitle>Edit Project</DialogTitle>
-            <DialogDescription>Update project details and image.</DialogDescription>
+            <DialogDescription>
+              Update project details and image.
+            </DialogDescription>
           </DialogHeader>
           {currentProject && (
             <div className="grid gap-4 py-4">
@@ -365,7 +393,9 @@ export default function ProjectsPage() {
                   onChange={(e) =>
                     setCurrentProject({
                       ...currentProject,
-                      image: e.target.files?.[0] ? URL.createObjectURL(e.target.files[0]) : currentProject.image,
+                      image: e.target.files?.[0]
+                        ? URL.createObjectURL(e.target.files[0])
+                        : currentProject.image,
                     })
                   }
                 />
@@ -376,7 +406,10 @@ export default function ProjectsPage() {
                   id="edit-title"
                   value={currentProject.title}
                   onChange={(e) =>
-                    setCurrentProject({ ...currentProject, title: e.target.value })
+                    setCurrentProject({
+                      ...currentProject,
+                      title: e.target.value,
+                    })
                   }
                 />
               </div>
@@ -397,10 +430,16 @@ export default function ProjectsPage() {
             </div>
           )}
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+            <Button
+              variant="outline"
+              onClick={() => setIsEditDialogOpen(false)}
+            >
               Cancel
             </Button>
-            <Button onClick={handleEditProject} disabled={updateProjectMutation.isPending}>
+            <Button
+              onClick={handleEditProject}
+              disabled={updateProjectMutation.isPending}
+            >
               {updateProjectMutation.isPending ? "Saving..." : "Save Changes"}
             </Button>
           </DialogFooter>
@@ -413,7 +452,8 @@ export default function ProjectsPage() {
           <DialogHeader>
             <DialogTitle>Delete Project</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete this project? This action cannot be undone.
+              Are you sure you want to delete this project? This action cannot
+              be undone.
             </DialogDescription>
           </DialogHeader>
           {currentProject && (
@@ -425,7 +465,10 @@ export default function ProjectsPage() {
             </div>
           )}
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+            <Button
+              variant="outline"
+              onClick={() => setIsDeleteDialogOpen(false)}
+            >
               Cancel
             </Button>
             <Button

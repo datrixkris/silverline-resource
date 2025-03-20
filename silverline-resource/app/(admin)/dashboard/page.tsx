@@ -124,7 +124,7 @@ export default function DashboardPage() {
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-4">
                       <Avatar>
-                        <AvatarImage src={`/placeholder.svg?height=32&width=32&text=${item.user.charAt(0)}`} />
+                        {/* <AvatarImage src={`/placeholder.svg?height=32&width=32&text=${item.user.charAt(0)}`} /> */}
                         <AvatarFallback>{item.user.charAt(0)}</AvatarFallback>
                       </Avatar>
                       <div className="space-y-1">

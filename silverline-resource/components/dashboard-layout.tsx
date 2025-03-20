@@ -76,9 +76,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
     { name: "Users", href: "/dashboard/users", icon: Users },
     { name: "Projects", href: "/dashboard/projects", icon: FolderKanban },
-    { name: "Blog", href: "/dashboard/blog", icon: FileText },
+    // { name: "Blog", href: "/dashboard/blog", icon: FileText },
     { name: "Staffs", href: "/dashboard/staffs", icon: Users },
-    { name: "Settings", href: "/dashboard/settings", icon: Settings },
+    // { name: "Settings", href: "/dashboard/settings", icon: Settings },
   ];
 
   const isActive = (path: string) => {
@@ -123,7 +123,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
           <div className="flex items-center gap-3">
             <Avatar>
               <AvatarImage
-                src="/placeholder.svg?height=32&width=32"
+                // src="/placeholder.svg?height=32&width=32"
                 alt={user?.name || "User"}
               />
               <AvatarFallback>{user?.name?.charAt(0) || "U"}</AvatarFallback>

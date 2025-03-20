@@ -39,50 +39,6 @@ import { MoreHorizontal, Pencil, Trash2, Search, UserPlus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { api } from "@/app/axiosApi/api";
 
-// Mock user data
-// const mockUsers = [
-//   {
-//     id: "1",
-//     name: "John Doe",
-//     email: "john@example.com",
-//     role: "admin",
-//     status: "active",
-//     createdAt: "2023-01-15",
-//   },
-//   {
-//     id: "2",
-//     name: "Jane Smith",
-//     email: "jane@example.com",
-//     role: "editor",
-//     status: "active",
-//     createdAt: "2023-02-20",
-//   },
-//   {
-//     id: "3",
-//     name: "Mike Johnson",
-//     email: "mike@example.com",
-//     role: "author",
-//     status: "inactive",
-//     createdAt: "2023-03-10",
-//   },
-//   {
-//     id: "4",
-//     name: "Sarah Williams",
-//     email: "sarah@example.com",
-//     role: "viewer",
-//     status: "active",
-//     createdAt: "2023-04-05",
-//   },
-//   {
-//     id: "5",
-//     name: "Alex Brown",
-//     email: "alex@example.com",
-//     role: "editor",
-//     status: "active",
-//     createdAt: "2023-05-12",
-//   },
-// ];
-
 interface User {
   id: string;
   fullName: string;
