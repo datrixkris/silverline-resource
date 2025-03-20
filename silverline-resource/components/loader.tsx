@@ -1,8 +1,8 @@
 import React from "react";
 
-type Props = {};
+// type Props = {};
 
-const Loader = (props: Props) => {
+const Loader = () => {
   return (
     <div className="h-screen w-full relative flex justify-center items-center">
       <svg

@@ -1,14 +1,6 @@
 "use client";
 
-import React, { useState, ChangeEvent, FormEvent } from "react";
-
-interface FormData {
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  subject: string;
-  message: string;
-}
+import React, { useState } from "react";
 
 const Form = () => {
   const [fullName, setFullName] = useState("");
