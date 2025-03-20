@@ -44,21 +44,25 @@ const NavBar = ({ type }: { type?: "white" }) => {
         {/* logo */}
         <div className="logo w-[130px] lg:w-[160px]">
           {navColor === "white" ? (
-            <Image
-              className="w-full"
-              src="/logo-light.svg"
-              alt="logo"
-              width={200}
-              height={60}
-            />
+            <Link href="/">
+              <Image
+                className="w-full"
+                src="/logo-light.svg"
+                alt="logo"
+                width={200}
+                height={60}
+              />
+            </Link>
           ) : (
-            <Image
-              className="w-full"
-              src="/logo-dark.svg"
-              alt="logo"
-              width={200}
-              height={60}
-            />
+            <Link href="/">
+              <Image
+                className="w-full"
+                src="/logo-dark.svg"
+                alt="logo"
+                width={200}
+                height={60}
+              />
+            </Link>
           )}
         </div>
 

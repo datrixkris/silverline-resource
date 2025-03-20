@@ -23,8 +23,8 @@ const TeamCard = ({ team }: { team: TeamCardProps }) => {
       </div>
 
       {/* content */}
-      <div className="text-center p-6">
-        <h4 className="font-bold mb-4">{team.name}</h4>
+      <div className="text-center p-5">
+        <h4 className="font-bold ">{team.name}</h4>
         <p className="">{team.position}</p>
       </div>
     </div>
