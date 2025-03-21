@@ -2,8 +2,8 @@ import axios from "axios";
 // import { useAuthStore } from "../stores/auth-store";
 
 
-// export const baseURL = "https://api.silverlineresource.com/v1/api/";
-export const baseURL = "http://localhost:8000/v1/api/";
+export const baseURL = "https://api.silverlineresource.com/v1/api/";
+// export const baseURL = "http://localhost:8000/v1/api/";
 
 
 export const api = axios.create({

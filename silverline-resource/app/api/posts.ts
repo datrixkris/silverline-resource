@@ -3,7 +3,7 @@ import { api } from "@/app/axiosApi/api";
 export interface Post {
   id: string;
   title: string;
-  excerpt: string;
+  // excerpt: string;
   content: string;
   image: string | File; 
   status: "published" | "draft";

@@ -1,7 +1,6 @@
 import type React from "react";
 import DashboardLayout from "@/components/dashboard-layout";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@/components/ui/toaster";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -14,7 +13,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         disableTransitionOnChange
       >
         {children}
-        <Toaster />
       </ThemeProvider>
     </DashboardLayout>
   );
