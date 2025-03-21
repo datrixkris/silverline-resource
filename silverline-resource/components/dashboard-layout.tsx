@@ -20,6 +20,8 @@ import {
   Sun,
   Settings,
   FileText,
+  Briefcase,
+  Sliders,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useTheme } from "next-themes";
@@ -78,8 +80,8 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     { name: "Users", href: "/dashboard/users", icon: Users },
     { name: "Projects", href: "/dashboard/projects", icon: FolderKanban },
     { name: "Blog", href: "/dashboard/blog", icon: FileText },
-    { name: "Services", href: "/dashboard/services", icon: FileText },
-    { name: "Sliders", href: "/dashboard/sliders", icon: FileText },
+    { name: "Services", href: "/dashboard/services", icon: Briefcase },
+    { name: "Sliders", href: "/dashboard/sliders", icon: Sliders },
     { name: "Staffs", href: "/dashboard/staffs", icon: Users },
     { name: "Settings", href: "/dashboard/settings", icon: Settings },
   ];
