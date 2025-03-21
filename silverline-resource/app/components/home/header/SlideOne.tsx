@@ -3,7 +3,9 @@ import { motion } from "framer-motion";
 
 const SlideOne = () => {
   return (
-    <header className="bg-[url('https://res.cloudinary.com/dnpiachdz/image/upload/v1741792329/home-banner-image2_zoc0bz.jpg')] absolute inset-0 w-full h-full bg-cover text-white ">
+    <header className="bg-[url('https://res.cloudinary.com/dnpiachdz/image/upload/v1741792329/home-banner-image2_zoc0bz.jpg')] bg-center absolute inset-0 w-full h-full bg-cover text-white ">
+      {/* overlay */}
+      <div className="absolute inset-0 bg-black/30"></div>
       {/* content */}
       <div className="flex justify-center flex-col py-[200px] h-full maximum-width relative">
         <SequentialText />
@@ -16,28 +18,19 @@ const SlideOne = () => {
 export default SlideOne;
 
 function SequentialText() {
-  const words = [
-    "This",
-    "Is",
-    "The",
-    "First",
-    "but",
-    "actually",
-    "second",
-    "Slide",
-  ];
+  const words = "Collaborative decision making in meeting client's objectives";
 
   return (
     <div className="space-y-8 max-w-[700px] [@media(min-height:600px)]:-translate-y-14">
       {/* Box Animation */}
-      <motion.div
+      {/* <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1.5, ease: "easeInOut" }}
         className="w-fit rounded-4xl px-8 py-1 font-bold border-3 border-local-primary"
       >
         Welcome to Silverline Resource Company Limited
-      </motion.div>
+      </motion.div> */}
 
       {/* Text Animation (Appears word by word) */}
       <motion.h2
@@ -53,7 +46,7 @@ function SequentialText() {
         }}
         className="font-bold text-4xl"
       >
-        {words.map((word, index) => (
+        {words.split(" ").map((word, index) => (
           <motion.span
             key={index}
             variants={{

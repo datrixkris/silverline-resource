@@ -65,9 +65,7 @@ const Footer = () => {
                   <a
                     href={service.link}
                     key={index}
-                    className={`mb-1 block w-fit hover:text-local-primary capitalize ${
-                      pathname === service.link ? "text-local-primary" : ""
-                    }`}
+                    className={`mb-1 block w-fit hover:text-local-primary capitalize`}
                   >
                     {service.name}
                   </a>
@@ -85,7 +83,11 @@ const Footer = () => {
                     href={link.link}
                     key={index}
                     className={`mb-1 block w-fit hover:text-local-primary capitalize ${
-                      pathname === link.link ? "text-local-primary" : ""
+                      pathname === link.link ||
+                      (link.link !== "/" &&
+                        pathname.includes(link.link.replace("/", "")))
+                        ? "text-local-primary"
+                        : ""
                     }`}
                   >
                     {link.name}

@@ -25,7 +25,7 @@ const NavBar = ({ type }: { type?: "white" }) => {
       if (window.scrollY > 50) {
         setNavColor(undefined);
       } else {
-        setNavColor(type);
+        setNavColor("white");
       }
     };
 
@@ -74,7 +74,11 @@ const NavBar = ({ type }: { type?: "white" }) => {
                 href={link.link}
                 key={index}
                 className={`hover:text-local-primary capitalize font-medium ${
-                  pathname === link.link ? "text-local-primary" : ""
+                  pathname === link.link ||
+                  (link.link !== "/" &&
+                    pathname.includes(link.link.replace("/", "")))
+                    ? "text-local-primary"
+                    : ""
                 }`}
               >
                 <span>{link.name}</span>

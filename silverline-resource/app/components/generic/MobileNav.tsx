@@ -74,7 +74,11 @@ const MobileNav = ({
                   href={link.link}
                   key={index}
                   className={`px-5 py-3 block hover:text-local-primary text-local-secondary font-medium ${
-                    pathname === link.link ? "!text-local-primary" : ""
+                    pathname === link.link ||
+                    (link.link !== "/" &&
+                      pathname.includes(link.link.replace("/", "")))
+                      ? "!text-local-primary"
+                      : ""
                   }`}
                 >
                   {link.name}

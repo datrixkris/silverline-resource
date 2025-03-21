@@ -25,7 +25,7 @@ const HomeHeader = () => {
   const SlideComponent = slides[index];
 
   return (
-    <>
+    <div className="relative">
       {/* navigation */}
       <NavBar type="white" />
 
@@ -40,7 +40,7 @@ const HomeHeader = () => {
 
       {/* carousel indicators */}
       <CarouselIndicators current={index} setCurrent={setIndex} />
-    </>
+    </div>
   );
 };
 

@@ -3,7 +3,9 @@ import { motion } from "framer-motion";
 
 const MainSlide = () => {
   return (
-    <header className="bg-[url('https://res.cloudinary.com/dnpiachdz/image/upload/v1741792119/home-banner-image_q0fjg1.png')] bg-cover text-white absolute inset-0 w-full h-full ">
+    <header className="bg-[url('https://res.cloudinary.com/dnpiachdz/image/upload/v1741792119/home-banner-image_q0fjg1.png')] bg-cover bg-center text-white absolute inset-0 w-full h-full ">
+      {/* overlay */}
+      <div className="absolute inset-0 bg-black/30"></div>
       {/* content */}
       <div className="flex justify-center flex-col py-[200px] h-full maximum-width relative">
         <SequentialText />
