@@ -1,5 +1,6 @@
 "use client";
 
+import { api } from "@/app/axiosApi/api";
 import React, { useState } from "react";
 
 const Form = () => {
@@ -20,17 +21,9 @@ const Form = () => {
     setResult("Sending message...");
     setLoading(true);
 
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json", // Specify JSON format
-      },
-      body: JSON.stringify(formData), // Convert object to JSON string
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
+    try {
+      const res = await api.post("contacts/send-mail", formData);
+      console.log(res);
       setStatus("success");
       setResult("Form Submitted Successfully");
       setTimeout(() => {
@@ -43,8 +36,8 @@ const Form = () => {
       setMessage("");
       setPhoneNumber("");
       setSubject("");
-    } else {
-      console.log("Error", data);
+    } catch (error) {
+      console.log("Error", error);
       setResult("Couldn't send mail");
       setStatus("error");
       setTimeout(() => {
