@@ -19,10 +19,10 @@ import {
   Moon,
   Sun,
   Settings,
+  FileText,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useTheme } from "next-themes";
-import { ModeToggle } from "./mode-toggle";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -66,7 +66,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       title: "Logged out",
       description: "You have been successfully logged out.",
     });
-    router.push("/login");
+    router.push("/auth/login");
   };
 
   if (!isMounted) {
@@ -77,7 +77,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
     { name: "Users", href: "/dashboard/users", icon: Users },
     { name: "Projects", href: "/dashboard/projects", icon: FolderKanban },
-    // { name: "Blog", href: "/dashboard/blog", icon: FileText },
+    { name: "Blog", href: "/dashboard/blog", icon: FileText },
+    { name: "Services", href: "/dashboard/services", icon: FileText },
+    { name: "Sliders", href: "/dashboard/sliders", icon: FileText },
     { name: "Staffs", href: "/dashboard/staffs", icon: Users },
     { name: "Settings", href: "/dashboard/settings", icon: Settings },
   ];
@@ -242,9 +244,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       <div className="flex flex-1 flex-col">
         {/* Desktop header */}
         <header className="hidden h-14 items-center border-b px-6 md:flex">
-          <div className="ml-auto flex items-center gap-4">
+          {/* <div className="ml-auto flex items-center gap-4">
             <ModeToggle />
-          </div>
+          </div> */}
         </header>
 
         {/* Page content */}

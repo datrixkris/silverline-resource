@@ -5,10 +5,21 @@ import Image from "next/image";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
-import { MoreHorizontal, Trash2, Search, UserPlus } from "lucide-react";
+import { MoreHorizontal, Trash2, Search, UserPlus, Pencil } from "lucide-react";
 import Link from "next/link";
 import { fetchStaff, deleteStaff, updateStaff, Staff } from "@/app/api/staff";
 import {
@@ -34,7 +45,11 @@ export default function StaffPage() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const { data: staff = [], isLoading, error } = useQuery<Staff[], Error>({
+  const {
+    data: staff = [],
+    isLoading,
+    error,
+  } = useQuery<Staff[], Error>({
     queryKey: ["staff"],
     queryFn: fetchStaff,
   });
@@ -58,8 +73,13 @@ export default function StaffPage() {
   });
 
   const updateStaffMutation = useMutation({
-    mutationFn: ({ id, staffData }: { id: string; staffData: Omit<Staff, "id"> }) =>
-      updateStaff(id, staffData),
+    mutationFn: ({
+      id,
+      staffData,
+    }: {
+      id: string;
+      staffData: Omit<Staff, "id">;
+    }) => updateStaff(id, staffData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["staff"] });
       toast({
@@ -77,7 +97,9 @@ export default function StaffPage() {
     },
   });
 
-  const uploadImageToCloudinary = async (file: File): Promise<string | null> => {
+  const uploadImageToCloudinary = async (
+    file: File
+  ): Promise<string | null> => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append(
@@ -155,7 +177,7 @@ export default function StaffPage() {
       member.position.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  if (isLoading) return <Loader/>;
+  if (isLoading) return <Loader />;
   if (error) return <div>Error loading staff: {error.message}</div>;
 
   return (
@@ -194,7 +216,11 @@ export default function StaffPage() {
               <CardHeader className="p-0">
                 <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
                   <Image
-                    src={typeof member.picture === "string" ? member.picture : "/placeholder.svg"}
+                    src={
+                      typeof member.picture === "string"
+                        ? member.picture
+                        : "/placeholder.svg"
+                    }
                     alt={member.name}
                     fill
                     className="object-cover"
@@ -203,12 +229,14 @@ export default function StaffPage() {
               </CardHeader>
               <CardContent className="p-4">
                 <CardTitle className="text-xl">{member.name}</CardTitle>
-                <p className="text-sm text-muted-foreground mt-1">{member.position}</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {member.position}
+                </p>
               </CardContent>
-              <CardFooter className="flex justify-between p-4 pt-0">
-                <Button variant="outline" onClick={() => handleEditClick(member)}>
+              <CardFooter className="flex justify-between p-4 pt-0 ml-auto ">
+                {/* <Button variant="outline" onClick={() => handleEditClick(member)}>
                   Edit
-                </Button>
+                </Button> */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="icon">
@@ -217,6 +245,13 @@ export default function StaffPage() {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
+                    <DropdownMenuItem
+                      onClick={() => handleEditClick(member)}
+                      className=""
+                    >
+                      <Pencil className="mr-2 h-4 w-4" />
+                      Edit
+                    </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => deleteStaffMutation.mutate(member.id)}
                       className="text-destructive focus:text-destructive"

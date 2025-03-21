@@ -55,7 +55,7 @@ export default function BlogPage() {
   // const [isImageUploading, setIsImageUploading] = useState(false);
   const [editForm, setEditForm] = useState<Omit<Post, "id" | "createdAt"> & { image: string | File }>({
     title: "",
-    excerpt: "",
+    // excerpt: "",
     image: "" as string | File,
     content: "",
     status: "draft",
@@ -149,15 +149,13 @@ export default function BlogPage() {
 
   const filteredPosts = posts.filter(
     (post) =>
-      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+      post.title.toLowerCase().includes(searchQuery.toLowerCase())   );
 
   const handleEditClick = (post: Post) => {
     setSelectedPost(post);
     setEditForm({
       title: post.title,
-      excerpt: post.excerpt,
+      // excerpt: post.excerpt,
       image: post.image,
       content: post.content,
       status: post.status,
@@ -218,7 +216,7 @@ export default function BlogPage() {
 
     const postData: Omit<Post, "id" | "createdAt"> = {
       title: editForm.title,
-      excerpt: editForm.content.substring(0, 100), // Generate excerpt from content
+      // excerpt: editForm.content.substring(0, 100), // Generate excerpt from content
       content: editForm.content,
       image: imageUrl,
       status: editForm.status,
@@ -325,8 +323,8 @@ export default function BlogPage() {
                 <CardTitle className="line-clamp-1 text-xl">
                   {post.title}
                 </CardTitle>
-                <CardDescription className="line-clamp-2 mt-2">
-                  {post.excerpt}
+                <CardDescription className="line-clamp-2 mt-2 ">
+                  {post.content}
                 </CardDescription>
               </CardHeader>
               <CardFooter className="flex justify-between p-4 pt-0 text-sm text-muted-foreground">
@@ -362,6 +360,7 @@ export default function BlogPage() {
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="content">Content</Label>
+                
                 <Input
                   id="content"
                   name="content"
