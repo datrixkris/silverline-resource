@@ -69,12 +69,6 @@ const ProjectsGrid = ({ dataLength }: { dataLength?: number }) => {
               </StaggeredFadeUp>
             ))}
           </div>
-
-          {/* {projects.length < 1 && (
-            <p className="text-gray-300 text-2xl text-center">
-              No data to display
-            </p>
-          )} */}
         </div>
       )}
     </section>
