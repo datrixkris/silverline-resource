@@ -1,3 +1,5 @@
+"use client";
+
 import React, {
   createContext,
   useContext,
@@ -5,6 +7,7 @@ import React, {
   useLayoutEffect,
 } from "react";
 import axios from "axios";
+import { api } from "../utils/api";
 
 // Define the SlideData interface
 export interface SlideData {
@@ -30,7 +33,7 @@ const SliderProvider = ({ children }: { children: React.ReactNode }) => {
   useLayoutEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("sliders"); // Update with actual API URL
+        const response = await api.get("sliders"); // Update with actual API URL
         setSlides(response.data);
       } catch (error) {
         console.error("Error fetching slider data:", error);

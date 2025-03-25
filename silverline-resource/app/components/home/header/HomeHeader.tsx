@@ -9,6 +9,7 @@ import SlideTwo from "./SlideTwo";
 import { AnimatePresence } from "framer-motion";
 import FadeInOut from "../../animations/FadeInOut";
 import { api } from "@/app/utils/api";
+import { useSlider } from "@/app/context/sliderContext";
 
 const slides = [MainSlide, SlideOne, SlideTwo];
 
@@ -20,24 +21,25 @@ export interface SlideData {
 
 const HomeHeader = () => {
   const [index, setIndex] = useState(0);
-  const [slideData, setSlideData] = useState<SlideData[]>([]);
+  // const [slideData, setSlideData] = useState<SlideData[]>([]);
   // const [loading, setLoading] = useState(false);
+  const { slides: slideData, loading } = useSlider();
 
-  useLayoutEffect(() => {
-    const fetchData = async () => {
-      try {
-        // setLoading(true);
-        const response = await api.get("sliders");
-        setSlideData(response.data);
-        // setLoading(false);
-      } catch (error) {
-        // setLoading(false);
-        console.log(error);
-      }
-    };
+  // useLayoutEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       // setLoading(true);
+  //       const response = await api.get("sliders");
+  //       setSlideData(response.data);
+  //       // setLoading(false);
+  //     } catch (error) {
+  //       // setLoading(false);
+  //       console.log(error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {

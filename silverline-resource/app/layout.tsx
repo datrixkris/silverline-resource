@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/Provider/providers";
 import { Toaster } from "@/components/ui/toaster";
+import SliderProvider from "./context/sliderContext";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
@@ -50,7 +51,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-[Futura] antialiased`}>
         {" "}
-        <Providers>{children}</Providers>
+        <Providers>
+          <SliderProvider>{children}</SliderProvider>
+        </Providers>
         <Toaster />
       </body>
     </html>
