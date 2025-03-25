@@ -1,14 +1,22 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { SlideData } from "./HomeHeader";
 
-const SlideTwo = () => {
+const SlideTwo = ({ slideData }: { slideData: SlideData }) => {
   return (
-    <header className="bg-[url('https://res.cloudinary.com/dnpiachdz/image/upload/v1741950816/DJI_0276_j62k47.jpg')] absolute inset-0 w-full h-full bg-cover bg-center text-white ">
+    <header
+      className={`bg-cover bg-center text-white absolute inset-0 w-full h-full`}
+      style={{
+        backgroundImage: slideData?.image
+          ? `url(${slideData.image})`
+          : "url('https://res.cloudinary.com/dnpiachdz/image/upload/v1741950816/DJI_0276_j62k47.jpg')",
+      }}
+    >
       {/* overlay */}
       <div className="absolute inset-0 bg-black/30"></div>
       {/* content */}
       <div className="flex justify-center flex-col py-[200px] h-full maximum-width relative">
-        <SequentialText />
+        <SequentialText text={slideData?.content} />
         {/* </div> */}
       </div>
     </header>
@@ -17,8 +25,8 @@ const SlideTwo = () => {
 
 export default SlideTwo;
 
-function SequentialText() {
-  const words = "Kwanfifi 6.9km Road in the Ashanti Region";
+function SequentialText({ text }: { text: string | undefined }) {
+  const words = text ? text : "Kwanfifi 6.9km Road in the Ashanti Region";
 
   return (
     <div className="space-y-8 max-w-[700px] [@media(min-height:600px)]:-translate-y-14">

@@ -1,14 +1,22 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { SlideData } from "./HomeHeader";
 
-const SlideOne = () => {
+const SlideOne = ({ slideData }: { slideData: SlideData }) => {
   return (
-    <header className="bg-[url('https://res.cloudinary.com/dnpiachdz/image/upload/v1741792329/home-banner-image2_zoc0bz.jpg')] bg-center absolute inset-0 w-full h-full bg-cover text-white ">
+    <header
+      className={`bg-cover bg-center text-white absolute inset-0 w-full h-full`}
+      style={{
+        backgroundImage: slideData?.image
+          ? `url(${slideData.image})`
+          : "url('https://res.cloudinary.com/dnpiachdz/image/upload/v1741792329/home-banner-image2_zoc0bz.jpg')",
+      }}
+    >
       {/* overlay */}
       <div className="absolute inset-0 bg-black/30"></div>
       {/* content */}
       <div className="flex justify-center flex-col py-[200px] h-full maximum-width relative">
-        <SequentialText />
+        <SequentialText text={slideData?.content} />
         {/* </div> */}
       </div>
     </header>
@@ -17,8 +25,10 @@ const SlideOne = () => {
 
 export default SlideOne;
 
-function SequentialText() {
-  const words = "Collaborative decision making in meeting client's objectives";
+function SequentialText({ text }: { text: string | undefined }) {
+  const words = text
+    ? text
+    : "Collaborative decision making in meeting client's objectives";
 
   return (
     <div className="space-y-8 max-w-[700px] [@media(min-height:600px)]:-translate-y-14">

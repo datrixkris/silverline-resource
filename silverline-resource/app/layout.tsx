@@ -50,7 +50,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-[Futura] antialiased`}>
         {" "}
-        <Providers>{children} </Providers>
+        <Providers>{children}</Providers>
         <Toaster />
       </body>
     </html>

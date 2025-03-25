@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { SlideData } from "./HomeHeader";
 
-const MainSlide = () => {
+const MainSlide = ({ slideData }: { slideData: SlideData }) => {
   return (
-    <header className="bg-[url('https://res.cloudinary.com/dnpiachdz/image/upload/v1741792119/home-banner-image_q0fjg1.png')] bg-cover bg-center text-white absolute inset-0 w-full h-full ">
+    <header
+      className={`bg-cover bg-center text-white absolute inset-0 w-full h-full`}
+      style={{
+        backgroundImage: slideData?.image
+          ? `url(${slideData.image})`
+          : "url('https://res.cloudinary.com/dnpiachdz/image/upload/v1741792119/home-banner-image_q0fjg1.png')",
+      }}
+    >
       {/* overlay */}
       <div className="absolute inset-0 bg-black/30"></div>
       {/* content */}
       <div className="flex justify-center flex-col py-[200px] h-full maximum-width relative">
-        <SequentialText />
+        <SequentialText text={slideData?.content} />
         {/* </div> */}
       </div>
     </header>
@@ -17,20 +25,22 @@ const MainSlide = () => {
 
 export default MainSlide;
 
-function SequentialText() {
-  const words = [
-    "Where",
-    "Building",
-    "Dreams",
-    "is",
-    "Not",
-    "Just",
-    "a",
-    "Job,",
-    "It's",
-    "Our",
-    "Passion",
-  ];
+function SequentialText({ text }: { text: string | undefined }) {
+  const words = text
+    ? text.split(" ")
+    : [
+        "Where",
+        "Building",
+        "Dreams",
+        "is",
+        "Not",
+        "Just",
+        "a",
+        "Job,",
+        "It's",
+        "Our",
+        "Passion",
+      ];
 
   return (
     <div className="space-y-8 max-w-[700px] [@media(min-height:600px)]:-translate-y-14">
