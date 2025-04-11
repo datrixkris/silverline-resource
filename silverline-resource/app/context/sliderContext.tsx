@@ -6,7 +6,6 @@ import React, {
   useState,
   useLayoutEffect,
 } from "react";
-import axios from "axios";
 import { api } from "../utils/api";
 
 // Define the SlideData interface
